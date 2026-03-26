@@ -81,4 +81,47 @@ const getUserProfile = async (req, res) => {
   }
 };
 
-export { registerUser, loginUser, getUserProfile };
+const updateProfile = async (req, res) => {
+  try {
+    if (!req.user) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+    console.log(req.body);
+
+    const { name, email, phone, street, city, state, pincode } = req.body;
+
+    const updateData = {};
+    if (name) updateData.name = name;
+    if (email) updateData.email = email;
+    if (phone) updateData.phone = phone;
+    if (street || city || state || pincode) {
+      updateData.address = {};
+      if (street) updateData.address.street = street;
+      if (city) updateData.address.city = city;
+      if (state) updateData.address.state = state;
+      if (pincode) updateData.address.pincode = pincode;
+    }
+
+    if (Object.keys(updateData).length === 0) {
+      return res.status(400).json({ error: "No data to update" });
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(req.user._id, updateData, {
+      new: true,
+      runValidation: true,
+    });
+
+    if (!updatedUser) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    const userResponse = updatedUser.toObject();
+    delete userResponse.passwordHash;
+
+    res.status(200).json(userResponse);
+  } catch (error) {
+    console.error("UPDATE PROFILE ERROR:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+export { registerUser, loginUser, getUserProfile, updateProfile };
