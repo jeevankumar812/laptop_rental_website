@@ -1,2 +1,2 @@
 ## Contributor
-- Jeevan Kumar
+- Jeevan Kumar ALvas
