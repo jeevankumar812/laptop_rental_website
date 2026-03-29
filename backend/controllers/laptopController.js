@@ -40,10 +40,28 @@ const getLaptopById = async (req, res) => {
 
 const addLaptop = async (req, res) => {
   try {
+    // 1. Get the path of the single uploaded file
+    const imagePath = req.file ? req.file.path : "";
+
+    // 2. Prepare laptop data
     const laptopData = {
       ...req.body,
+      // Parse nested objects if they arrive as strings from FormData
+      specs:
+        typeof req.body.specs === "string"
+          ? JSON.parse(req.body.specs)
+          : req.body.specs,
+      pricing:
+        typeof req.body.pricing === "string"
+          ? JSON.parse(req.body.pricing)
+          : req.body.pricing,
+
+      // Store the single path in your existing array field
+      images: imagePath ? [imagePath] : [],
+
       availableUnits: req.body.totalUnits || 1,
     };
+
     const laptop = await Laptop.create(laptopData);
     res.status(201).json(laptop);
   } catch (error) {

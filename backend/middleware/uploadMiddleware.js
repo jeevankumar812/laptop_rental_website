@@ -2,23 +2,28 @@ import multer from "multer";
 import path from "path";
 import fs from "fs";
 
-const uploadDir = "uploads/kyc/";
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir, { recursive: true });
-}
+// Helper to get storage configuration based on a subfolder
+const getStorage = (subFolder) => {
+  const uploadDir = `uploads/${subFolder}/`;
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, uploadDir);
-  },
-  filename: (req, file, cb) => {
-    // Save file as: userId-timestamp.extension
-    const uniqueSuffix = `${req.user._id}-${Date.now()}${path.extname(file.originalname)}`;
-    cb(null, uniqueSuffix);
-  },
-});
+  // Create directory if it doesn't exist
+  if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir, { recursive: true });
+  }
 
-// File filter to allow only images/PDFs
+  return multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, uploadDir);
+    },
+    filename: (req, file, cb) => {
+      // Format: userID-timestamp.extension
+      const uniqueSuffix = `${req.user._id}-${Date.now()}${path.extname(file.originalname)}`;
+      cb(null, uniqueSuffix);
+    },
+  });
+};
+
+// Filter logic
 const fileFilter = (req, file, cb) => {
   const allowedTypes = /jpeg|jpg|png|pdf/;
   const extname = allowedTypes.test(
@@ -29,12 +34,21 @@ const fileFilter = (req, file, cb) => {
   if (extname && mimetype) {
     return cb(null, true);
   } else {
-    cb(new Error("Only .png, .jpg, .jpeg and .pdf format allowed!"));
+    cb(new Error("Format not supported! (Allowed: .png, .jpg, .jpeg, .pdf)"));
   }
 };
 
-export const upload = multer({
-  storage,
-  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB limit
+// Export two separate upload instances
+const uploadKYCInfo = multer({
+  storage: getStorage("kyc"),
+  limits: { fileSize: 5 * 1024 * 1024 },
   fileFilter,
 });
+
+const uploadLaptop = multer({
+  storage: getStorage("laptop"),
+  limits: { fileSize: 10 * 1024 * 1024 }, // Slightly higher limit for high-res laptop shots
+  fileFilter,
+});
+
+export { uploadKYCInfo, uploadLaptop };
