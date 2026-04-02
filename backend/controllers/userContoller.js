@@ -83,38 +83,49 @@ const getUserProfile = async (req, res) => {
 
 const updateProfile = async (req, res) => {
   try {
-    if (!req.user) {
-      return res.status(401).json({ error: "Unauthorized" });
-    }
-    console.log(req.body);
+    if (!req.user) return res.status(401).json({ error: "Unauthorized" });
 
     const { name, email, phone, street, city, state, pincode } = req.body;
 
     const updateData = {};
-    if (name) updateData.name = name;
-    if (email) updateData.email = email;
-    if (phone) updateData.phone = phone;
-    if (street) updateData["address.street"] = street;
-    if (city) updateData["address.city"] = city;
-    if (state) updateData["address.state"] = state;
-    if (pincode) updateData["address.pincode"] = pincode;
 
-    if (Object.keys(updateData).length === 0) {
+    if (name?.trim()) updateData.name = name.trim();
+    if (email?.trim()) updateData.email = email.trim();
+    if (phone?.trim()) updateData.phone = phone.trim();
+    if (street?.trim()) updateData["address.street"] = street.trim();
+    if (city?.trim()) updateData["address.city"] = city.trim();
+    if (state?.trim()) updateData["address.state"] = state.trim();
+    if (pincode?.trim()) updateData["address.pincode"] = pincode.trim();
+
+    if (Object.keys(updateData).length === 0)
       return res.status(400).json({ error: "No data to update" });
+
+    if (updateData.email) {
+      const existing = await User.findOne({ email: updateData.email });
+      if (existing && existing._id.toString() !== req.user._id.toString())
+        return res.status(400).json({ error: "Email already in use" });
     }
 
-    const updatedUser = await User.findByIdAndUpdate(req.user._id, updateData, {
-      new: true,
-      runValidators: true,
-    });
-
-    if (!updatedUser) {
-      return res.status(404).json({ error: "User not found" });
+    if (updateData.phone) {
+      const existing = await User.findOne({ phone: updateData.phone });
+      if (existing && existing._id.toString() !== req.user._id.toString())
+        return res.status(400).json({ error: "Phone number already in use" });
     }
+
+    const updatedUser = await User.findByIdAndUpdate(
+      req.user._id,
+      { $set: updateData },
+      { new: true, runValidators: true },
+    );
+
+    if (!updatedUser) return res.status(404).json({ error: "User not found" });
+
     const userResponse = updatedUser.toObject();
     delete userResponse.passwordHash;
 
-    res.status(200).json(userResponse);
+    res
+      .status(200)
+      .json({ message: "Profile updated successfully", user: userResponse });
   } catch (error) {
     console.error("UPDATE PROFILE ERROR:", error);
     res.status(500).json({ error: "Internal server error" });

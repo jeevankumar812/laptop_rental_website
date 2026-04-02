@@ -1,4 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
+import { FaUserCircle } from "react-icons/fa";
 import "./Navbar.css";
 
 const Navbar = ({ user, setUser }) => {
@@ -48,9 +49,15 @@ const Navbar = ({ user, setUser }) => {
             </Link>
           </>
         ) : (
-          <button className="btn logout" onClick={handleLogout}>
-            Logout
-          </button>
+          <>
+            <Link to="/profile" className="profile-icon">
+              <FaUserCircle size={28} />
+            </Link>
+
+            <button className="btn logout" onClick={handleLogout}>
+              Logout
+            </button>
+          </>
         )}
       </div>
     </nav>

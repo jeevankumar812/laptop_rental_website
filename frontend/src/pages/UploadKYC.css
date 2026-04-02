@@ -1,0 +1,251 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&display=swap");
+
+.kyc-container {
+  background: #000;
+  color: #fff;
+  font-family: "DM Mono", monospace;
+  min-height: 100vh;
+  padding: 48px 24px;
+  max-width: 640px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* ── Header ── */
+.kyc-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.kyc-tag {
+  font-family: "DM Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: #c6f135;
+  border: 1px solid #c6f135;
+  display: inline-block;
+  padding: 2px 8px;
+  width: fit-content;
+}
+
+.kyc-title {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: clamp(40px, 8vw, 64px);
+  letter-spacing: 0.04em;
+  margin: 0;
+  line-height: 1;
+  color: #fff;
+}
+
+.kyc-sub {
+  font-size: 12px;
+  color: #666;
+  margin: 0;
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+}
+
+/* ── Drop Zone ── */
+.kyc-dropzone {
+  border: 2px dashed #333;
+  min-height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    border-color 0.2s,
+    background 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.kyc-dropzone:hover {
+  border-color: #c6f135;
+  background: #0a0a0a;
+}
+
+.kyc-dropzone--has-file {
+  border-style: solid;
+  border-color: #c6f135;
+}
+
+.kyc-input-hidden {
+  display: none;
+}
+
+/* Placeholder state */
+.kyc-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 40px;
+  pointer-events: none;
+}
+
+.kyc-placeholder-icon {
+  font-size: 40px;
+  color: #333;
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.kyc-dropzone:hover .kyc-placeholder-icon {
+  color: #c6f135;
+}
+
+.kyc-placeholder-text {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  color: #555;
+  margin: 0;
+  text-align: center;
+}
+
+.kyc-placeholder-accent {
+  color: #c6f135;
+}
+
+/* Image preview */
+.kyc-preview-img {
+  width: 100%;
+  height: 220px;
+  object-fit: contain;
+  padding: 16px;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+/* PDF file info */
+.kyc-file-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 40px;
+  pointer-events: none;
+}
+
+.kyc-file-icon {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 48px;
+  color: #c6f135;
+  letter-spacing: 0.1em;
+}
+
+.kyc-file-name {
+  font-size: 12px;
+  color: #aaa;
+  word-break: break-all;
+  text-align: center;
+}
+
+.kyc-file-size {
+  font-size: 11px;
+  color: #555;
+}
+
+/* ── Actions Row ── */
+.kyc-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.kyc-selected-name {
+  font-size: 11px;
+  color: #555;
+  letter-spacing: 0.05em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 200px;
+}
+
+.kyc-btn-group {
+  display: flex;
+  gap: 12px;
+}
+
+/* ── Buttons ── */
+.kyc-btn {
+  font-family: "DM Mono", monospace;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  padding: 10px 24px;
+  border: none;
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    color 0.15s,
+    opacity 0.15s;
+}
+
+.kyc-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.kyc-btn--primary {
+  background: #c6f135;
+  color: #000;
+}
+
+.kyc-btn--primary:hover:not(:disabled) {
+  background: #d4ff3d;
+}
+
+.kyc-btn--loading {
+  opacity: 0.7;
+}
+
+.kyc-btn--ghost {
+  background: transparent;
+  color: #666;
+  border: 1px solid #333;
+}
+
+.kyc-btn--ghost:hover:not(:disabled) {
+  border-color: #666;
+  color: #aaa;
+}
+
+/* ── Status Message ── */
+.kyc-message {
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-left: 3px solid transparent;
+}
+
+.kyc-message--success {
+  border-color: #c6f135;
+  color: #c6f135;
+  background: #0d1400;
+}
+
+.kyc-message--error {
+  border-color: #ff4444;
+  color: #ff4444;
+  background: #1a0000;
+}
+
+.kyc-message-icon {
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+/* ── Re-upload button ── */
+.kyc-reupload {
+  align-self: flex-start;
+  margin-top: -12px;
+}
