@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import API from "../api/axios.js";
 import "./LaptopCard.css";
 const LaptopCard = () => {
+  const navigate = useNavigate();
   const [laptops, setLaptops] = useState([]);
 
   const baseURL = "http://localhost:8000/";
@@ -18,6 +20,10 @@ const LaptopCard = () => {
     fetchLaptop();
   }, []);
 
+  const handleRentNow = (laptop) => {
+    navigate("/checkout", { state: { laptop } });
+  };
+
   return (
     <div className="laptop-container">
       {laptops.map((laptop) => (
@@ -32,7 +38,9 @@ const LaptopCard = () => {
 
           <h4>₹{laptop.pricing?.perDay} / day</h4>
 
-          <button className="rent-btn">Rent Now</button>
+          <button className="rent-btn" onClick={() => handleRentNow(laptop)}>
+            Rent Now
+          </button>
         </div>
       ))}
     </div>

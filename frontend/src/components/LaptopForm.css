@@ -16,7 +16,28 @@
   border-bottom: 1px solid #f0f0f0;
   padding-bottom: 8px;
 }
+.form-select {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background-color: #fff;
+  color: #333;
+  outline: none;
+  cursor: pointer;
+  transition: border 0.2s;
+}
 
+.form-select:focus {
+  border-color: #1080e8;
+}
+
+/* Ensure the Classification section looks distinct */
+.section-title {
+  color: #1080e8; /* Blue accent for titles */
+  border-left: 4px solid #1080e8;
+  padding-left: 10px;
+}
 /* Two column grid for General & Inventory */
 .grid-2 {
   display: grid;

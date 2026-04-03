@@ -6,6 +6,9 @@ import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import UploadKYC from "./pages/UploadKYC";
 import AdminDashboard from "./pages/AdminDashboard";
+import Checkout from "./pages/CheckOut";
+import RentalSuccess from "./pages/RentalSuccess";
+import MyBooking from "./pages/MyBooking";
 import { useState } from "react";
 
 const App = () => {
@@ -27,6 +30,9 @@ const App = () => {
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/login" element={<Login setUser={setUser} />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/rental-success/:id" element={<RentalSuccess />} />
+        <Route path="/my-bookings" element={<MyBooking />} />
         <Route
           path="/profile"
           element={<Profile user={user} updateUser={updateUser} />}

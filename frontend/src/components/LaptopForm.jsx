@@ -14,6 +14,7 @@ const LaptopForm = () => {
     os: "",
     securityDeposit: "",
     totalUnits: "",
+    category: "Office",
   });
   const [pricing, setPricing] = useState({
     perDay: "",
@@ -46,10 +47,12 @@ const LaptopForm = () => {
     // 1. Append general top-level fields
     data.append("model", formData.model);
     data.append("brand", formData.brand);
+    data.append("category", formData.category);
     data.append("os", formData.os);
     data.append("display", formData.display);
     data.append("securityDeposit", formData.securityDeposit);
     data.append("totalUnits", formData.totalUnits);
+    data.append("tags", formData.tags);
 
     // 2. Group and Stringify the SPECS object (Fixes your 400 error)
     const specs = {
@@ -111,6 +114,15 @@ const LaptopForm = () => {
             />
           </div>
           <div className="field-group">
+            <label>Processor</label>
+            <input
+              name="processor"
+              placeholder="e.g. Intel i7 / M3"
+              value={formData.processor}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="field-group">
             <label>Storage</label>
             <input
               name="storage"
@@ -120,7 +132,33 @@ const LaptopForm = () => {
             />
           </div>
         </div>
-
+        {/* New Classification Section */}
+        <div className="section-title">Classification & Tags</div>
+        <div className="grid-2">
+          <div className="field-group">
+            <label>Primary Category</label>
+            <select
+              name="category"
+              value={formData.category}
+              onChange={handleChange}
+              className="form-select"
+            >
+              <option value="Office">Office</option>
+              <option value="Gaming">Gaming</option>
+              <option value="Student">Student</option>
+              <option value="Workstation">Workstation</option>
+            </select>
+          </div>
+          <div className="field-group">
+            <label>Custom Tags (comma separated)</label>
+            <input
+              name="tags"
+              placeholder="e.g. RGB, RTX 4060, Lightweight"
+              value={formData.tags}
+              onChange={handleChange}
+            />
+          </div>
+        </div>
         <div className="section-title">Inventory & Security</div>
         <div className="grid-2">
           <div className="field-group">

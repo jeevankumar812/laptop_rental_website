@@ -4,16 +4,8 @@ import User from "../models/User.js";
 
 const createRental = async (req, res) => {
   try {
-    const {
-      laptopId,
-      rentedFrom,
-      rentedTo,
-      totalDays,
-      baseAmount,
-      totalAmount,
-      deliveryType,
-      deliveryAddress,
-    } = req.body;
+    const { laptopId, rentedFrom, rentedTo, deliveryType, deliveryAddress } =
+      req.body;
 
     // 1. Fetch Laptop to get total capacity
     const laptop = await Laptop.findById(laptopId);
@@ -27,14 +19,17 @@ const createRental = async (req, res) => {
     const start = new Date(rentedFrom);
     const end = new Date(rentedTo);
 
+    const totalDays = Math.ceil((end - start) / (1000 * 60 * 60 * 24));
+
+    const baseAmount = totalDays * laptop.pricing.perDay;
+
+    const totalAmount = baseAmount + laptop.securityDeposit;
+
     const activeRentalsCount = await Rental.countDocuments({
       laptopId,
       status: { $in: ["pending", "active"] },
-      $or: [
-        { rentedFrom: { $lte: end, $gte: start } }, // Starts during requested range
-        { rentedTo: { $gte: start, $lte: end } }, // Ends during requested range
-        { rentedFrom: { $lte: start }, rentedTo: { $gte: end } }, // Spans across entire range
-      ],
+      rentedFrom: { $lt: end },
+      rentedTo: { $gt: start },
     });
 
     if (activeRentalsCount >= laptop.totalUnits) {
