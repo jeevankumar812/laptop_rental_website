@@ -1,6 +1,8 @@
 import User from "../models/User.js";
 import jwt from "jsonwebtoken";
-
+import crypto from "crypto";
+import { PasswordResetToken } from "../models/PasswordResetToken.js";
+import { sendPasswordResetEmail } from "../utils/sendEmail.js";
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN,
@@ -167,4 +169,121 @@ const uploadKYC = async (req, res) => {
   }
 };
 
-export { registerUser, loginUser, getUserProfile, updateProfile, uploadKYC };
+const forgotPassword = async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    // Generic response for security (prevents user enumeration)
+    const genericResponse = {
+      success: true,
+      message:
+        "If an account exists with this email, you will receive a password reset link.",
+    };
+
+    // Find user
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(200).json(genericResponse);
+    }
+
+    // Generate secure reset token
+    const rawToken = crypto.randomBytes(32).toString("hex");
+    const tokenHash = crypto
+      .createHash("sha256")
+      .update(rawToken)
+      .digest("hex");
+
+    // Save hashed token to database
+    await PasswordResetToken.create({
+      userId: user._id,
+      tokenHash: tokenHash,
+      expiresAt: new Date(Date.now() + 30 * 60 * 1000), // 30 minutes
+    });
+
+    // Send email with raw token
+    await sendPasswordResetEmail(email, rawToken, user.name);
+
+    res.status(200).json(genericResponse);
+  } catch (error) {
+    console.error("Forgot password error:", error);
+    res.status(500).json({
+      success: false,
+      message: "An error occurred. Please try again later.",
+    });
+  }
+};
+
+const resetPassword = async (req, res) => {
+  try {
+    const { token, newPassword } = req.body;
+
+    // Validation
+    if (!token || !newPassword) {
+      return res.status(400).json({
+        success: false,
+        message: "Token and new password are required.",
+      });
+    }
+
+    if (newPassword.length < 6) {
+      return res.status(400).json({
+        success: false,
+        message: "Password must be at least 6 characters long.",
+      });
+    }
+
+    // Hash the received token
+    const tokenHash = crypto.createHash("sha256").update(token).digest("hex");
+
+    // Find valid token (not expired)
+    const resetToken = await PasswordResetToken.findOne({
+      tokenHash: tokenHash,
+      expiresAt: { $gt: new Date() },
+    });
+
+    if (!resetToken) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid or expired reset token. Please request a new one.",
+      });
+    }
+
+    // Find user
+    const user = await User.findById(resetToken.userId);
+    if (!user) {
+      return res.status(400).json({
+        success: false,
+        message: "User not found.",
+      });
+    }
+
+    // Update password (pre-save hook will hash it automatically)
+    user.passwordHash = newPassword;
+    await user.save();
+
+    // Delete used token (one-time use)
+    await PasswordResetToken.deleteOne({ _id: resetToken._id });
+
+    res.status(200).json({
+      success: true,
+      message:
+        "Password has been reset successfully. You can now login with your new password.",
+    });
+  } catch (error) {
+    console.error("Reset password error:", error);
+    res.status(500).json({
+      success: false,
+      message: "An error occurred. Please try again later.",
+    });
+  }
+};
+
+export {
+  registerUser,
+  loginUser,
+  getUserProfile,
+  updateProfile,
+  uploadKYC,
+  forgotPassword,
+  resetPassword,
+};

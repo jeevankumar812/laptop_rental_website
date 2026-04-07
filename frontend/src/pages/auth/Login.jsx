@@ -53,7 +53,14 @@ const Login = ({ setUser }) => {
           onChange={handleChange}
           required
         />
-
+        <div className="text-right">
+          <a
+            href="/forgot-password"
+            className="text-sm text-indigo-600 hover:text-indigo-500"
+          >
+            Forgot Password?
+          </a>
+        </div>
         <button type="submit">Login</button>
       </form>
     </div>

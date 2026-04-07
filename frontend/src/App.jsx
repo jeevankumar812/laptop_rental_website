@@ -9,6 +9,8 @@ import Dashboard from "./pages/admin/Dashboard";
 import Checkout from "./pages/rental/CheckOut";
 import RentalSuccess from "./pages/rental/RentalSuccess";
 import MyBooking from "./pages/user/MyBooking";
+import ForgotPassword from "./components/forms/ForgotPassword";
+import ResetPassword from "./components/forms/ResetPassword";
 import { useState } from "react";
 
 const App = () => {
@@ -41,6 +43,8 @@ const App = () => {
           path="/upload-kyc"
           element={<UploadKYC updateUser={updateUser} />}
         />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
       </Routes>
     </>
   );

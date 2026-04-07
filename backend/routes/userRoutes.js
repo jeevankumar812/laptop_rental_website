@@ -4,6 +4,8 @@ import {
   getUserProfile,
   updateProfile,
   uploadKYC,
+  forgotPassword,
+  resetPassword,
 } from "../controllers/userContoller.js";
 
 import { protect } from "../middleware/authMiddleware.js";
@@ -26,5 +28,7 @@ router.post(
   uploadKYCInfo.single("document"),
   uploadKYC,
 );
+router.post("/forgot-password", forgotPassword);
+router.post("/reset-password", resetPassword);
 
 export default router;
