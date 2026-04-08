@@ -201,7 +201,12 @@ const forgotPassword = async (req, res) => {
     });
 
     // Send email with raw token
-    await sendPasswordResetEmail(email, rawToken, user.name);
+    try {
+      await sendPasswordResetEmail(email, rawToken, user.name);
+    } catch (emailErr) {
+      console.error("Email send failed:", emailErr);
+      // token is saved, you can still respond
+    }
 
     res.status(200).json(genericResponse);
   } catch (error) {
