@@ -1,0 +1,71 @@
+.home-container {
+  background-color: #0f172a;
+  color: white;
+  padding-bottom: 40px;
+}
+
+/* Section */
+.category-section {
+  margin-top: 40px;
+  padding: 0 20px;
+}
+
+.category-section h2 {
+  margin-bottom: 15px;
+  font-size: 22px;
+}
+
+/* Horizontal Scroll */
+.scroll-row {
+  display: flex;
+  overflow-x: auto;
+  gap: 20px;
+  scroll-behavior: smooth;
+}
+
+.scroll-row::-webkit-scrollbar {
+  display: none;
+}
+
+/* Card */
+.netflix-card {
+  min-width: 250px;
+  background: #1e293b;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.netflix-card:hover {
+  transform: scale(1.08);
+}
+
+.netflix-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+/* Card Info */
+.card-info {
+  padding: 10px;
+}
+
+.card-info h4 {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.card-info p {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.card-info button {
+  background: #22c55e;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: white;
+}
