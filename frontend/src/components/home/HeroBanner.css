@@ -21,16 +21,18 @@
   position: relative;
   z-index: 2;
   display: flex;
-  justify-content: space-between;
+  justify-content: center; /* 🔥 center whole content */
+  align-items: center;
   width: 100%;
-  padding: 0 60px;
+  padding: 0 80px;
+  gap: 80px; /* 🔥 balanced spacing */
 }
 
 /* LEFT TEXT */
 .hero-text {
-  max-width: 50%;
+  flex: 1;
+  max-width: 500px;
 }
-
 .hero-text h1 {
   font-size: 48px;
   font-weight: bold;
@@ -84,14 +86,22 @@
 }
 
 /* RIGHT IMAGE */
+.hero-image {
+  flex: 1;
+  display: flex;
+  justify-content: center; /* 🔥 center image */
+  align-items: center;
+}
 .hero-image img {
-  width: 450px;
+  width: 800px;
   object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); /* 🔥 depth */
   transition: transform 0.4s ease;
 }
 
 .hero-image img:hover {
-  transform: scale(1.05);
+  transform: scale(1.08);
 }
 
 /* LOADING */
