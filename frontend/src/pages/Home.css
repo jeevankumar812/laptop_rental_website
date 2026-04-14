@@ -1,17 +1,25 @@
+/* ===== FULL PAGE ===== */
 .home-container {
+  width: 100%;
+  min-height: 100vh;
   background-color: #020617;
   color: white;
-  padding-bottom: 40px;
+
+  display: flex;              /* 🔥 important */
+  flex-direction: column;     /* stack hero + sections */
 }
 
-/* SECTION */
+/* ===== SECTION ===== */
 .category-section {
-  margin-top: 40px;
-  padding: 0 30px;
+  width: 100%;
+  margin-top: 50px;
+  padding: 0 60px;
+  box-sizing: border-box;     /* 🔥 prevents overflow */
 }
 
+/* TITLE */
 .category-section h2 {
-  margin-bottom: 15px;
+  margin-bottom: 18px;
   font-size: 22px;
   font-weight: 600;
 }

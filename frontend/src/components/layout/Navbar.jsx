@@ -6,39 +6,33 @@ const Navbar = ({ user, setUser }) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
+    localStorage.clear();
     setUser(null);
     navigate("/login");
   };
 
   return (
-    <nav className="navbar">
-      <div className="logo">
-        <Link to="/">LaptopRent</Link>
+    <header className="navbar">
+      {/* LEFT - LOGO */}
+      <div className="nav-left">
+        <Link to="/" className="logo">
+          LaptopRent
+        </Link>
       </div>
 
-      <ul className="nav-links">
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-
-        <li>
-          <Link to="/laptops">Laptops</Link>
-        </li>
-
-        <li>
-          <Link to="/my-bookings">My Bookings</Link>
-        </li>
+      {/* CENTER - LINKS */}
+      <nav className="nav-center">
+        <Link to="/">Home</Link>
+        <Link to="/laptops">Laptops</Link>
+        <Link to="/my-bookings">Bookings</Link>
 
         {user?.role === "admin" && (
-          <li>
-            <Link to="/admin">Admin Dashboard</Link>
-          </li>
+          <Link to="/admin">Admin</Link>
         )}
-      </ul>
+      </nav>
 
-      <div className="auth-buttons">
+      {/* RIGHT - AUTH */}
+      <div className="nav-right">
         {!user ? (
           <>
             <Link to="/login" className="btn login">
@@ -50,8 +44,8 @@ const Navbar = ({ user, setUser }) => {
           </>
         ) : (
           <>
-            <Link to="/profile" className="profile-icon">
-              <FaUserCircle size={28} />
+            <Link to="/profile" className="profile">
+              <FaUserCircle size={26} />
             </Link>
 
             <button className="btn logout" onClick={handleLogout}>
@@ -60,7 +54,7 @@ const Navbar = ({ user, setUser }) => {
           </>
         )}
       </div>
-    </nav>
+    </header>
   );
 };
 
