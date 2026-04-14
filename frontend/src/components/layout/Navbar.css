@@ -1,55 +1,118 @@
+/* ===== NAVBAR ===== */
 .navbar {
+  position: sticky; /* 🔥 stays on top */
+  top: 0;
+  z-index: 1000;
+
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  background: #111;
-  padding: 15px 40px;
+  justify-content: space-between;
+
+  padding: 14px 50px;
+
+  background: rgba(2, 6, 23, 0.9);
+  backdrop-filter: blur(10px); /* 🔥 glass effect */
+
+  border-bottom: 1px solid #1e293b;
 }
 
-.logo a {
+/* ===== LEFT ===== */
+.logo {
+  font-size: 20px;
+  font-weight: 600;
   color: white;
-  font-size: 22px;
-  font-weight: bold;
   text-decoration: none;
 }
 
-.nav-links {
+/* ===== CENTER LINKS ===== */
+.nav-center {
   display: flex;
-  list-style: none;
   gap: 30px;
 }
 
-.nav-links a {
-  color: white;
+.nav-center a {
   text-decoration: none;
-  font-size: 16px;
+  color: #cbd5f5;
+  font-size: 14px;
+  position: relative;
+  transition: 0.3s;
 }
 
-.nav-links a:hover {
-  color: #00bcd4;
+/* underline animation */
+.nav-center a::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background: #22c55e;
+  transition: 0.3s;
 }
 
-.auth-buttons {
+.nav-center a:hover {
+  color: #22c55e;
+}
+
+.nav-center a:hover::after {
+  width: 100%;
+}
+
+/* ===== RIGHT SIDE ===== */
+.nav-right {
   display: flex;
-  gap: 10px;
+  align-items: center;
+  gap: 12px;
 }
 
+/* ===== BUTTON BASE ===== */
 .btn {
-  padding: 8px 14px;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  text-decoration: none;
+  color: white;
   border: none;
   cursor: pointer;
-  text-decoration: none;
-  color: white;
+  transition: 0.3s;
 }
 
+/* LOGIN */
 .login {
-  background: #2196f3;
+  background: transparent;
+  border: 1px solid #334155;
 }
 
+.login:hover {
+  border-color: #22c55e;
+  color: #22c55e;
+}
+
+/* SIGNUP */
 .signup {
-  background: #4caf50;
+  background: #22c55e;
 }
 
+.signup:hover {
+  background: #16a34a;
+}
+
+/* LOGOUT */
 .logout {
-  background: #f44336;
+  background: #ef4444;
+}
+
+.logout:hover {
+  background: #dc2626;
+}
+
+/* PROFILE */
+.profile {
+  color: #cbd5f5;
+  display: flex;
+  align-items: center;
+}
+
+.profile:hover {
+  color: #22c55e;
 }
