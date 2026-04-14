@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import API from "../../api/axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./Auth.css";
+
 const Signup = () => {
   const navigate = useNavigate();
 
@@ -28,12 +29,9 @@ const Signup = () => {
 
     try {
       await API.post("/users/register", formData);
-
       alert("Registration successful");
-
       navigate("/login");
     } catch (error) {
-      console.error(error);
       alert(error.response?.data?.message || "Registration failed");
     }
   };
@@ -41,40 +39,25 @@ const Signup = () => {
   return (
     <div className="auth-container">
       <form className="auth-form" onSubmit={handleSubmit}>
-        <h2>Register</h2>
+        <h2>Signup</h2>
 
-        <input
-          name="name"
-          placeholder="Name"
-          onChange={handleChange}
-          required
-        />
-        <input
-          name="email"
-          placeholder="Email"
-          onChange={handleChange}
-          required
-        />
-        <input
-          name="phone"
-          placeholder="Phone"
-          onChange={handleChange}
-          required
-        />
-        <input
-          name="password"
-          type="password"
-          placeholder="Password"
-          onChange={handleChange}
-          required
-        />
+        <input name="name" placeholder="Full Name" onChange={handleChange} required />
+        <input name="email" placeholder="Email" onChange={handleChange} required />
+        <input name="phone" placeholder="Phone Number" onChange={handleChange} required />
+        <input name="password" type="password" placeholder="Password" onChange={handleChange} required />
 
         <input name="street" placeholder="Street" onChange={handleChange} />
         <input name="city" placeholder="City" onChange={handleChange} />
         <input name="state" placeholder="State" onChange={handleChange} />
         <input name="pincode" placeholder="Pincode" onChange={handleChange} />
 
-        <button type="submit">Register</button>
+        <button type="submit">Signup</button>
+
+        {/* 🔥 SWITCH TO LOGIN */}
+        <p>
+          Already registered?{" "}
+          <Link to="/login">Login</Link>
+        </p>
       </form>
     </div>
   );

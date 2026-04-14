@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import API from "../../api/axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./Auth.css";
+
 const Login = ({ setUser }) => {
   const navigate = useNavigate();
 
@@ -25,10 +26,10 @@ const Login = ({ setUser }) => {
 
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
+
       setUser(res.data.user);
       navigate("/");
     } catch (error) {
-      console.error(error);
       alert(error.response?.data?.message || "Login failed");
     }
   };
@@ -41,7 +42,7 @@ const Login = ({ setUser }) => {
         <input
           name="email"
           type="email"
-          placeholder="Email"
+          placeholder="Enter your email"
           onChange={handleChange}
           required
         />
@@ -49,19 +50,22 @@ const Login = ({ setUser }) => {
         <input
           name="password"
           type="password"
-          placeholder="Password"
+          placeholder="Enter your password"
           onChange={handleChange}
           required
         />
+
         <div className="text-right">
-          <a
-            href="/forgot-password"
-            className="text-sm text-indigo-600 hover:text-indigo-500"
-          >
-            Forgot Password?
-          </a>
+          <Link to="/forgot-password">Forgot Password?</Link>
         </div>
+
         <button type="submit">Login</button>
+
+        {/* 🔥 SWITCH TO SIGNUP */}
+        <p>
+          Don’t have an account?{" "}
+          <Link to="/signup">Signup</Link>
+        </p>
       </form>
     </div>
   );

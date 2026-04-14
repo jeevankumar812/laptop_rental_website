@@ -14,7 +14,7 @@ import ResetPassword from "./components/forms/ResetPassword";
 import LaptopDetails from "./pages/rental/LaptopDetails";
 import LaptopPage from "./pages/rental/LaptopPage";
 import { useState } from "react";
-
+import "./App.css";
 const App = () => {
   const [user, setUser] = useState(() =>
     JSON.parse(localStorage.getItem("user")),

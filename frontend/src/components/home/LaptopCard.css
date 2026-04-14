@@ -1,14 +1,18 @@
 /* ================= CONTAINER ================= */
 .row-container {
   position: relative;
+  width: 100%;          /* full width */
+  display: flex;
+  justify-content: center; 
 }
 
-/* ================= SCROLL ROW ================= */
+
 .row {
   display: flex;
+  justify-content: center;   /* 🔥 center content */
   gap: 20px;
   overflow-x: auto;
-  padding: 20px 50px;
+  padding: 20px 60px;
   scroll-behavior: smooth;
 }
 
@@ -111,11 +115,11 @@
 
 /* ===== PRICE BOX ===== */
 .price {
-  flex: 1; /* 🔥 equal width */
+  flex: 1;
   background: #1e293b;
   color: #22c55e;
-  min-width: 0.5px;
-  height: 0.1px; /* 🔥 same height */
+
+  height: 41px; /* ✅ SAME as button */
   display: flex;
   align-items: center;
   justify-content: center;
