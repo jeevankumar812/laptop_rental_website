@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import API from "../../api/axios";
+import "./MyBooking.css";
 
 const MyBooking = () => {
   const [bookings, setBookings] = useState([]);
@@ -24,58 +25,63 @@ const MyBooking = () => {
     });
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div className="booking-page">
       <h2>My Bookings</h2>
 
       {bookings.length === 0 ? (
-        <p>No bookings found</p>
+        <p className="empty">No bookings found</p>
       ) : (
-        bookings.map((booking) => (
-          <div
-            key={booking._id}
-            style={{
-              border: "1px solid #ddd",
-              padding: "16px",
-              marginBottom: "12px",
-              borderRadius: "8px",
-            }}
-          >
-            <img
-              src={`http://localhost:8000/${booking.rentalId?.laptopId?.images?.[0]}`}
-              alt="laptop"
-              style={{
-                width: "120px",
-                height: "90px",
-                objectFit: "cover",
-                borderRadius: "8px",
-              }}
-            />
-            <h3>
-              {booking.rentalId?.laptopId
-                ? `${booking.rentalId.laptopId.brand} ${booking.rentalId.laptopId.model}`
-                : "Laptop"}
-            </h3>
-            <p>Processor: {booking.rentalId?.laptopId?.specs?.processor} </p>
-            <p>Storage: {booking.rentalId?.laptopId?.specs?.storage}</p>
-            <p>RAM: {booking.rentalId?.laptopId?.specs?.ram}</p>
-            <p>OS: {booking.rentalId?.laptopId?.specs?.os}</p>
-            <p>
-              Rental: {formatDate(booking.rentalId?.rentedFrom)} →
-              {formatDate(booking.rentalId?.rentedTo)}
-            </p>
+        <div className="booking-grid">
+          {bookings.map((booking) => {
+            const laptop = booking.rentalId?.laptopId;
 
-            <p>
-              Amount: ₹{booking.amount ? booking.amount.toLocaleString() : "-"}
-            </p>
+            return (
+              <div className="booking-card" key={booking._id}>
+                {/* IMAGE */}
+                <img
+                  src={`http://localhost:8000/${laptop?.images?.[0]}`}
+                  alt="laptop"
+                />
 
-            <p>
-              Status:{" "}
-              {booking.status === "success" ? "Paid" : booking.status || "-"}
-            </p>
-          </div>
-        ))
+                {/* INFO */}
+                <div className="booking-info">
+                  <h3>
+                    {laptop ? `${laptop.brand} ${laptop.model}` : "Laptop"}
+                  </h3>
+
+                  <p className="specs">
+                    {laptop?.specs?.processor} • {laptop?.specs?.ram} •{" "}
+                    {laptop?.specs?.storage}
+                  </p>
+
+                  <p className="dates">
+                    {formatDate(booking.rentalId?.rentedFrom)} →{" "}
+                    {formatDate(booking.rentalId?.rentedTo)}
+                  </p>
+
+                  <div className="bottom">
+                    <span className="price">
+                      ₹{booking.amount?.toLocaleString() || "-"}
+                    </span>
+
+                    <span
+                      className={`status ${
+                        booking.status === "success" ? "paid" : "pending"
+                      }`}
+                    >
+                      {booking.status === "success"
+                        ? "Paid"
+                        : booking.status || "Pending"}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       )}
     </div>
   );
 };
+
 export default MyBooking;
