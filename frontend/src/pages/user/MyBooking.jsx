@@ -6,47 +6,73 @@ const MyBooking = () => {
   const [bookings, setBookings] = useState([]);
 
   useEffect(() => {
-    const getBookings = async () => {
+    const fetchBookings = async () => {
       try {
         const res = await API.get("/payments/my-history");
         setBookings(res.data);
-      } catch (error) {
-        console.error("Error fetching bookings:", error);
+      } catch (err) {
+        console.error("Error fetching bookings:", err);
       }
     };
 
-    getBookings();
+    fetchBookings();
   }, []);
 
-  const formatDate = (date) =>
-    new Date(date).toLocaleDateString("en-IN", {
+  // 📅 Format Date
+  const formatDate = (date) => {
+    if (!date) return "-";
+    return new Date(date).toLocaleDateString("en-IN", {
       day: "numeric",
       month: "short",
+      year: "numeric",
     });
+  };
+
+  // ⏱ Duration
+  const getDays = (from, to) => {
+    if (!from || !to) return 0;
+    const diff =
+      new Date(to).getTime() - new Date(from).getTime();
+    return Math.ceil(diff / (1000 * 60 * 60 * 24));
+  };
 
   return (
     <div className="booking-page">
-      <h2>My Bookings</h2>
+      <div className="booking-header">
+        <h2>My Bookings</h2>
+        <p>Track all your rented laptops and history</p>
+      </div>
 
       {bookings.length === 0 ? (
-        <p className="empty">No bookings found</p>
+        <div className="empty-state">
+          <p>No bookings found</p>
+        </div>
       ) : (
         <div className="booking-grid">
           {bookings.map((booking) => {
             const laptop = booking.rentalId?.laptopId;
+            const from = booking.rentalId?.rentedFrom;
+            const to = booking.rentalId?.rentedTo;
+
+            const days = getDays(from, to);
+            const perDay = laptop?.pricing?.perDay || 0;
 
             return (
               <div className="booking-card" key={booking._id}>
                 {/* IMAGE */}
-                <img
-                  src={`http://localhost:8000/${laptop?.images?.[0]}`}
-                  alt="laptop"
-                />
+                <div className="card-image">
+                  <img
+                    src={`http://localhost:8000/${laptop?.images?.[0]}`}
+                    alt="laptop"
+                  />
+                </div>
 
-                {/* INFO */}
-                <div className="booking-info">
+                {/* CONTENT */}
+                <div className="card-content">
                   <h3>
-                    {laptop ? `${laptop.brand} ${laptop.model}` : "Laptop"}
+                    {laptop
+                      ? `${laptop.brand} ${laptop.model}`
+                      : "Laptop"}
                   </h3>
 
                   <p className="specs">
@@ -54,24 +80,41 @@ const MyBooking = () => {
                     {laptop?.specs?.storage}
                   </p>
 
-                  <p className="dates">
-                    {formatDate(booking.rentalId?.rentedFrom)} →{" "}
-                    {formatDate(booking.rentalId?.rentedTo)}
-                  </p>
+                  {/* DATE */}
+                  <div className="date-section">
+                    <div>
+                      <span>Start</span>
+                      <p>{formatDate(from)}</p>
+                    </div>
+                    <div>
+                      <span>End</span>
+                      <p>{formatDate(to)}</p>
+                    </div>
+                    <div>
+                      <span>Duration</span>
+                      <p>{days} days</p>
+                    </div>
+                  </div>
 
-                  <div className="bottom">
-                    <span className="price">
-                      ₹{booking.amount?.toLocaleString() || "-"}
-                    </span>
+                  {/* PRICE + STATUS */}
+                  <div className="price-status">
+                    <div className="price-box">
+                     
+                      <h4>
+                        ₹{booking.amount?.toLocaleString()}
+                      </h4>
+                    </div>
 
                     <span
                       className={`status ${
-                        booking.status === "success" ? "paid" : "pending"
+                        booking.status === "success"
+                          ? "paid"
+                          : "pending"
                       }`}
                     >
                       {booking.status === "success"
                         ? "Paid"
-                        : booking.status || "Pending"}
+                        : "Pending"}
                     </span>
                   </div>
                 </div>
