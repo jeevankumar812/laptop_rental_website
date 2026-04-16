@@ -4,7 +4,7 @@ import LaptopCard from "../components/home/LaptopCard";
 import API from "../api/axios";
 import "./Home.css";
 import Footer from "../components/home/Footer";
-
+//home 
 const Home = () => {
   const [laptops, setLaptops] = useState([]);
 
