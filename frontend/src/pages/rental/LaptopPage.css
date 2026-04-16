@@ -1,61 +1,207 @@
+/* ================= PAGE ================= */
 .laptops-page {
-  padding: 40px;
-  background: #020617;
-  color: white;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #020617, #020617, #000000);
+  color: #e2e8f0;
+  padding: 40px 60px;
+  font-family: "Inter", sans-serif;
 }
 
-/* SEARCH */
+/* ================= TITLE ================= */
+.laptops-page h1 {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 25px;
+  color: #f8fafc;
+  letter-spacing: -0.5px;
+}
+
+/* ================= SEARCH ================= */
 .search-bar {
   width: 100%;
-  padding: 12px;
-  margin: 20px 0;
-  border-radius: 8px;
-  border: none;
+  max-width: 420px;
+  padding: 13px 15px;
+  margin-bottom: 25px;
+
+  border-radius: 12px;
+  border: 1px solid #1e293b;
+
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(8px);
+
+  color: #e2e8f0;
+  font-size: 14px;
+
+  transition: 0.25s;
 }
 
-/* FILTERS */
+.search-bar::placeholder {
+  color: #64748b;
+}
+
+.search-bar:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.15);
+}
+
+/* ================= FILTERS ================= */
 .filters {
   display: flex;
-  gap: 10px;
   flex-wrap: wrap;
-  margin-bottom: 20px;
+  gap: 12px;
+  margin-bottom: 30px;
 }
 
 .filters input,
 .filters select {
-  padding: 10px;
-  border-radius: 6px;
-  border: none;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #1e293b;
+
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(6px);
+
+  color: #e2e8f0;
+  font-size: 13px;
+  min-width: 140px;
+
+  transition: 0.2s;
 }
 
-/* GRID */
+.filters input:focus,
+.filters select:focus {
+  border-color: #3b82f6;
+  outline: none;
+}
+
+/* ================= GRID ================= */
 .laptop-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 26px;
 }
 
-/* CARD */
+/* ================= CARD ================= */
 .laptop-card {
-  background: #0f172a;
-  padding: 15px;
-  border-radius: 12px;
+  background: linear-gradient(145deg, #0b1220, #020617);
+  border-radius: 16px;
+  overflow: hidden;
   cursor: pointer;
-  transition: 0.3s;
+
+  border: 1px solid rgba(255, 255, 255, 0.05);
+
+  transition: all 0.3s ease;
+
+  display: flex;
+  flex-direction: column;
+  position: relative;
 }
 
 .laptop-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-6px);
+  border-color: rgba(59, 130, 246, 0.4);
+  box-shadow: 0 20px 40px rgba(2, 6, 23, 0.8);
 }
 
+/* ================= IMAGE ================= */
 .laptop-card img {
   width: 100%;
-  height: 140px;
+  height: 170px;
   object-fit: cover;
-  border-radius: 8px;
+
+  background: #020617;
+  transition: 0.3s;
 }
 
+.laptop-card:hover img {
+  transform: scale(1.03);
+}
+
+/* ================= BODY ================= */
+.card-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* TITLE */
+.card-body h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #f1f5f9;
+}
+
+/* CPU */
+.cpu {
+  font-size: 13px;
+  color: #94a3b8;
+}
+
+/* ================= TAGS ================= */
+.tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin: 6px 0;
+}
+
+.tags span {
+  font-size: 11px;
+  background: rgba(148, 163, 184, 0.12);
+  padding: 4px 8px;
+  border-radius: 6px;
+  color: #cbd5f5;
+}
+
+/* ================= BOTTOM ================= */
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+/* ================= PRICE ================= */
 .price {
-  color: #22c55e;
-  font-weight: bold;
+  font-size: 15px;
+  font-weight: 600;
+  color: #e2e8f0;
+
+  background: rgba(255, 255, 255, 0.05);
+  padding: 6px 10px;
+  border-radius: 8px;
+
+  backdrop-filter: blur(4px);
+}
+
+/* ================= CONDITION ================= */
+.condition {
+  font-size: 11px;
+  padding: 5px 9px;
+  border-radius: 6px;
+
+  background: rgba(59, 130, 246, 0.15);
+  color: #93c5fd;
+}
+
+/* ================= STATUS ================= */
+.status-text {
+  color: #64748b;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 600px) {
+  .laptops-page {
+    padding: 20px;
+  }
+
+  .filters input,
+  .filters select {
+    min-width: 100%;
+  }
 }

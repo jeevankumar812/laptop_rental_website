@@ -24,20 +24,23 @@ const LaptopPage = () => {
     try {
       setLoading(true);
 
-      const params = {
-        ...filters,
-      };
-
-      const res = await API.get("/laptops", { params });
+      const res = await API.get("/laptops", { params: filters });
 
       let data = res.data;
 
-      if (search) {
-        data = data.filter((lap) =>
-          `${lap.brand} ${lap.model}`
-            .toLowerCase()
-            .includes(search.toLowerCase()),
-        );
+      // 🔥 ADVANCED SEARCH (IMPORTANT FIX)
+      if (search.trim() !== "") {
+        const term = search.toLowerCase();
+
+        data = data.filter((lap) => {
+          return (
+            lap.brand?.toLowerCase().includes(term) ||
+            lap.model?.toLowerCase().includes(term) ||
+            lap.specs?.processor?.toLowerCase().includes(term) ||
+            lap.specs?.gpu?.toLowerCase().includes(term) ||
+            lap.pricing?.perDay?.toString().includes(term)
+          );
+        });
       }
 
       setLaptops(data);
@@ -50,7 +53,7 @@ const LaptopPage = () => {
 
   useEffect(() => {
     fetchLaptops();
-  }, [filters]);
+  }, [filters, search]); // 🔥 also trigger on search
 
   const handleChange = (e) => {
     setFilters({ ...filters, [e.target.name]: e.target.value });
@@ -60,17 +63,18 @@ const LaptopPage = () => {
     <div className="laptops-page">
       <h1>All Laptops</h1>
 
+      {/* 🔍 SEARCH */}
       <input
         type="text"
-        placeholder="Search laptops..."
+        placeholder="Search "
         className="search-bar"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
 
+      {/* 🎯 FILTERS */}
       <div className="filters">
         <input name="brand" placeholder="Brand" onChange={handleChange} />
-
         <input name="gpu" placeholder="GPU" onChange={handleChange} />
 
         <select name="condition" onChange={handleChange}>
@@ -95,9 +99,10 @@ const LaptopPage = () => {
         />
       </div>
 
+      {/* 📦 GRID */}
       <div className="laptop-grid">
         {loading ? (
-          <p>Loading...</p>
+          <p className="status-text">Loading...</p>
         ) : laptops.length > 0 ? (
           laptops.map((lap) => (
             <div
@@ -107,15 +112,22 @@ const LaptopPage = () => {
             >
               <img src={`${baseURL}${lap.images?.[0]}`} alt={lap.model} />
 
-              <h3>
-                {lap.brand} {lap.model}
-              </h3>
-              <p>{lap.specs?.processor}</p>
-              <p className="price">₹{lap.pricing?.perDay}/day</p>
+              <div className="card-body">
+                <h3>{lap.brand} {lap.model}</h3>
+                <p className="cpu">{lap.specs?.processor}</p>
+
+                <div className="bottom">
+                  <span className="price">
+                    ₹{lap.pricing?.perDay} /day
+                  </span>
+
+                 
+                </div>
+              </div>
             </div>
           ))
         ) : (
-          <p>No laptops found</p>
+          <p className="status-text">No laptops found</p>
         )}
       </div>
     </div>
