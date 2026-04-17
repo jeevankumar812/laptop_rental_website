@@ -4,8 +4,7 @@ import User from "../models/User.js";
 
 const createRental = async (req, res) => {
   try {
-    const { laptopId, rentedFrom, rentedTo, deliveryType, deliveryAddress } =
-      req.body;
+    const { laptopId, rentedFrom, rentedTo } = req.body;
 
     // 1. Fetch Laptop to get total capacity
     const laptop = await Laptop.findById(laptopId);
@@ -53,9 +52,7 @@ const createRental = async (req, res) => {
       rentedFrom: start,
       rentedTo: end,
       totalDays,
-      deliveryType,
-      deliveryAddress:
-        deliveryType === "delivery" ? deliveryAddress : undefined,
+      deliveryType: "pickup",
       pricing: { baseAmount, totalAmount },
       securityDeposit: laptop.securityDeposit,
     });

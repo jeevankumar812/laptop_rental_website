@@ -31,14 +31,8 @@ const rentSchema = new Schema(
     depositRefunded: { type: Boolean, default: false },
     deliveryType: {
       type: String,
-      enum: ["pickup", "delivery"],
+      enum: ["pickup"],
       default: "pickup",
-    },
-    deliveryAddress: {
-      street: { type: String },
-      city: { type: String },
-      state: { type: String },
-      pincode: { type: String },
     },
     notes: { type: String, default: "" },
   },

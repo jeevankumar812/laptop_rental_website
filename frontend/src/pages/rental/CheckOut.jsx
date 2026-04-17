@@ -1,17 +1,22 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./CheckOut.css";
-import API from "../../api/axios";
+import API from "../../api/axios.js";
+import KYCModal from "../../components/kyc/KYCModal";
 
 const Checkout = () => {
   const baseURL = "http://localhost:8000/";
   const location = useLocation();
+  const navigate = useNavigate();
   const { laptop } = location.state || {};
 
   const [rentedFrom, setRentedFrom] = useState("");
   const [rentedTo, setRentedTo] = useState("");
   const [deliveryType, setDeliveryType] = useState("pickup");
   const [address, setAddress] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [showKYCModal, setShowKYCModal] = useState(false);
 
   if (!laptop) {
     return <div>No laptop selected.</div>;
@@ -49,18 +54,30 @@ const Checkout = () => {
 
     return res.data;
   };
+
   const verifyPayment = async (paymentData, rentalId) => {
     await API.post("/payments/verify", {
       ...paymentData,
       rentalId,
     });
 
-    window.location.href = `/rental-success/${rentalId}`;
+    navigate(`/rental-success/${rentalId}`);
   };
+
+  const handleKYCSuccess = () => {
+    // Optionally refresh user data or show success message
+    setError("KYC document submitted! Please wait for admin verification.");
+    setTimeout(() => {
+      setError(null);
+    }, 3000);
+  };
+
   const handlePayment = async () => {
+    setLoading(true);
+    setError(null);
+
     try {
       const rentalId = await createRental();
-
       const order = await createOrder(rentalId);
 
       const options = {
@@ -70,7 +87,6 @@ const Checkout = () => {
         order_id: order.id,
         name: "Laptop Rental",
         description: laptop.model,
-
         handler: async function (response) {
           await verifyPayment(response, rentalId);
         },
@@ -79,13 +95,44 @@ const Checkout = () => {
       const razor = new window.Razorpay(options);
       razor.open();
     } catch (err) {
-      console.error(err);
+      console.error("Payment Error:", err);
+
+      // Handle KYC verification error
+      if (err.response?.status === 403) {
+        const errorMessage = err.response?.data?.error || "";
+
+        if (
+          errorMessage.toLowerCase().includes("kyc") ||
+          errorMessage.toLowerCase().includes("verification")
+        ) {
+          setShowKYCModal(true);
+          setError(
+            "KYC verification required. Please complete your KYC to continue.",
+          );
+        } else {
+          setError(errorMessage);
+        }
+      } else if (err.response?.status === 400) {
+        setError(err.response?.data?.error || "Invalid rental details");
+      } else {
+        setError("Failed to process payment. Please try again.");
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className="checkout-container">
       <h1>Checkout</h1>
+
+      {/* Error Message */}
+      {error && (
+        <div className="error-alert">
+          <span>❌ {error}</span>
+          <button onClick={() => setError(null)}>Dismiss</button>
+        </div>
+      )}
 
       {/* Laptop Summary */}
       <div className="summary">
@@ -148,10 +195,17 @@ const Checkout = () => {
       <button
         className="pay-btn"
         onClick={handlePayment}
-        disabled={!rentedFrom || !rentedTo || days <= 0}
+        disabled={!rentedFrom || !rentedTo || days <= 0 || loading}
       >
-        Pay Now
+        {loading ? "Processing..." : "Pay Now"}
       </button>
+
+      {/* KYC Modal Component */}
+      <KYCModal
+        isOpen={showKYCModal}
+        onClose={() => setShowKYCModal(false)}
+        onSuccess={handleKYCSuccess}
+      />
     </div>
   );
 };

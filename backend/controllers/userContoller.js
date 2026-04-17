@@ -117,7 +117,7 @@ const updateProfile = async (req, res) => {
     const updatedUser = await User.findByIdAndUpdate(
       req.user._id,
       { $set: updateData },
-      { new: true, runValidators: true },
+      { returnDocument: "after", runValidators: true },
     );
 
     if (!updatedUser) return res.status(404).json({ error: "User not found" });
@@ -151,7 +151,7 @@ const uploadKYC = async (req, res) => {
         kycDocument: req.file.path,
         kycVerified: false,
       },
-      { new: true, runValidators: true },
+      { returnDocument: "after", runValidators: true },
     ).select("-passwordHash");
 
     if (!updatedUser) {
