@@ -18,7 +18,7 @@ import "./App.css";
 
 const App = () => {
   const [user, setUser] = useState(() =>
-    JSON.parse(localStorage.getItem("user"))
+    JSON.parse(localStorage.getItem("user")),
   );
 
   const updateUser = (updatedUser) => {

@@ -5,6 +5,7 @@ import {
   returnLaptop,
   cancelRental,
   adminGetRental,
+  getRentalById,
 } from "../controllers/rentalController.js";
 import validate from "../middleware/validate.js";
 import { createRentalSchema } from "../validators/index.js";
@@ -15,6 +16,7 @@ const router = Router();
 
 router.get("/", protect, getUserRentals);
 router.get("/admin", protect, admin, adminGetRental);
+router.get("/:id", protect, getRentalById);
 router.post("/", protect, validate(createRentalSchema), createRental);
 router.put("/:id", protect, returnLaptop);
 router.delete("/:id", protect, cancelRental);

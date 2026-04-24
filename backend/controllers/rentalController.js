@@ -146,7 +146,7 @@ const cancelRental = async (req, res) => {
 const getRentalById = async (req, res) => {
   try {
     const rental = await Rental.findById(req.params.id)
-      .populate("laptopId", "brand model pricing")
+      .populate("laptopId", "brand model pricing specs images securityDeposit")
       .populate("userId", "name email");
     if (!rental) return res.status(404).json({ error: "Rental not found" });
     res.status(200).json(rental);
