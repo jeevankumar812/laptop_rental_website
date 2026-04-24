@@ -1,0 +1,126 @@
+/* ===== FONT ===== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+/* ===== PAGE ===== */
+.admin-rentals-page {
+  width: 100%;
+  flex: 1;
+  background: #f5f7fb;
+  font-family: 'Inter', sans-serif;
+}
+
+/* ===== CONTAINER ===== */
+.rentals-container {
+  padding: 30px 35px;
+  width: 100%;
+}
+
+/* ===== HEADER ===== */
+.rentals-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.rentals-header h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #0f172a;
+  letter-spacing: -0.3px;
+}
+
+.count {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+/* ===== GRID ===== */
+.rentals-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 20px;
+}
+
+/* ===== CARD ===== */
+.rental-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+
+  padding: 20px;
+  min-height: 220px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  transition: all 0.25s ease;
+}
+
+/* ✨ HOVER */
+.rental-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+/* ===== TOP ===== */
+.rental-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rental-top h3 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* ===== AMOUNT ===== */
+.amount {
+  font-size: 20px;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* ===== SECTION BOX ===== */
+.rental-section {
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+}
+
+/* TEXT */
+.rental-section p {
+  font-size: 13px;
+  color: #374151;
+  margin: 4px 0;
+}
+
+.rental-section strong {
+  color: #111827;
+  font-weight: 500;
+}
+
+/* ===== LOADING ===== */
+.rentals-loading {
+  padding: 50px;
+  text-align: center;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .rentals-list {
+    grid-template-columns: 1fr;
+  }
+
+  .rental-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}

@@ -9,11 +9,21 @@
 
 .row {
   display: flex;
-  justify-content: center;   /* 🔥 center content */
   gap: 20px;
+
   overflow-x: auto;
-  padding: 20px 60px;
+  padding: 20px 40px;   /* reduced side padding */
+
   scroll-behavior: smooth;
+
+  justify-content: flex-start;   /* 🔥 FIX */
+   scroll-padding-left: 40px;
+  scroll-padding-right: 40px;
+}
+
+.row::after {
+  content: "";
+  min-width: 20px; /* spacing at end */
 }
 
 .row::-webkit-scrollbar {

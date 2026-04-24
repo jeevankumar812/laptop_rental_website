@@ -1,0 +1,95 @@
+/* ===== PAGE ===== */
+.admin-users-page {
+  width: 100%;
+  flex: 1;
+}
+
+/* ===== CONTAINER ===== */
+.admin-users-page .users-container {
+  width: 100%;
+  padding: 20px 30px;
+}
+
+/* ===== HEADER ===== */
+.admin-users-page .users-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.admin-users-page .users-header h2 {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.admin-users-page .count {
+  font-size: 13px;
+  color: #777;
+}
+
+/* ===== GRID (KEY PART) ===== */
+.admin-users-page .users-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); /* 🔥 */
+  gap: 20px;
+}
+
+/* ===== CARD ===== */
+.admin-users-page .user-card {
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 14px;
+
+  padding: 16px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  transition: 0.25s ease;
+}
+
+.admin-users-page .user-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.06);
+}
+
+/* ===== TOP ===== */
+.admin-users-page .user-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.admin-users-page .user-top h3 {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* ===== ROLE BADGE ===== */
+.admin-users-page .role {
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: #f3f4f6;
+  border: 1px solid #ddd;
+}
+
+/* ===== DETAILS ===== */
+.admin-users-page .user-section {
+  padding: 8px;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  background: #fafafa;
+}
+
+.admin-users-page .user-section p {
+  font-size: 12.5px;
+  margin: 2px 0;
+}
+
+/* ===== LOADING ===== */
+.admin-users-page .users-loading {
+  padding: 40px;
+  text-align: center;
+}

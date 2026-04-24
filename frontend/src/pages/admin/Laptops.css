@@ -1,0 +1,128 @@
+/* ===== PAGE SCOPE ===== */
+.admin-laptops-page {
+  width: 100%;
+}
+
+/* ===== GRID ===== */
+.admin-laptops-page .laptops-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+/* ===== CARD ===== */
+.admin-laptops-page .laptop-card {
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.25s ease;
+}
+
+/* hover polish */
+.admin-laptops-page .laptop-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+}
+
+/* ===== IMAGE ===== */
+.admin-laptops-page .laptop-image {
+  width: 100%;
+  height: 160px;
+  overflow: hidden;
+  border-bottom: 1px solid #eee;
+}
+
+.admin-laptops-page .laptop-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+/* subtle zoom */
+.admin-laptops-page .laptop-card:hover img {
+  transform: scale(1.05);
+}
+
+/* ===== CONTENT ===== */
+.admin-laptops-page .laptop-content {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ===== HEADER ===== */
+.admin-laptops-page .laptop-header h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.admin-laptops-page .brand {
+  font-size: 13px;
+  color: #777;
+}
+
+/* ===== SPECS ===== */
+.admin-laptops-page .laptop-specs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.admin-laptops-page .laptop-specs span {
+  font-size: 11.5px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  background: #f7f7f7;
+}
+
+/* ===== FOOTER ===== */
+.admin-laptops-page .laptop-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+/* ===== PRICE ===== */
+.admin-laptops-page .price {
+  font-size: 18px;
+  font-weight: 600;
+  color: #000;
+}
+
+/* ===== BUTTON ===== */
+.admin-laptops-page .delete-btn {
+  padding: 6px 12px;
+  font-size: 13px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  background: #fff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.admin-laptops-page .delete-btn:hover {
+  background: #f3f3f3;
+}
+
+/* ===== META ===== */
+.admin-laptops-page .laptop-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #666;
+}
+
+/* ===== LOADING ===== */
+.admin-laptops-page .laptops-loading {
+  padding: 40px;
+  text-align: center;
+}
