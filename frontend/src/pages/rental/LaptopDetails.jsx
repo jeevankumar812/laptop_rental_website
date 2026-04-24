@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import API from "../../api/axios.js";
 import {
   Cpu,
   HardDrive,
@@ -16,22 +17,30 @@ const LaptopDetails = () => {
   const [laptop, setLaptop] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:8000/api/laptops/${id}`)
-      .then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch");
-        return res.json();
-      })
-      .then((data) => {
-        setLaptop(data);
-        setLoading(false);
-      })
-      .catch((err) => {
+    const fetchLaptopDetails = async () => {
+      try {
+        const laptopRes = await API.get(`/laptops/${id}`);
+        setLaptop(laptopRes.data);
+      } catch (err) {
         console.error(err);
-        setError(err.message);
-        setLoading(false);
-      });
+        setError("Failed to load laptop");
+      }
+
+      try {
+        const reviewRes = await API.get(`/reviews/laptop/${id}`);
+        setReviews(reviewRes.data);
+      } catch (err) {
+        console.error(err);
+        setReviews([]);
+      }
+
+      setLoading(false);
+    };
+
+    fetchLaptopDetails();
   }, [id]);
 
   if (loading) return <div className="loading">Loading...</div>;
@@ -117,6 +126,26 @@ const LaptopDetails = () => {
           <button className="rent-btn" onClick={handleRentNow}>
             Rent Now
           </button>
+        </div>
+        <div className="reviews-section">
+          <h3>Customer Reviews</h3>
+
+          {reviews.length === 0 ? (
+            <p className="no-reviews">No reviews yet</p>
+          ) : (
+            reviews.map((r) => (
+              <div key={r._id} className="review-card">
+                <div className="review-header">
+                  <span className="review-user">
+                    {r.userId?.name || "Anonymous"}
+                  </span>
+                  <span className="review-rating">{"⭐".repeat(r.rating)}</span>
+                </div>
+
+                <p className="review-comment">{r.comment}</p>
+              </div>
+            ))
+          )}
         </div>
       </div>
     </div>

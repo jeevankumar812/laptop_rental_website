@@ -278,3 +278,31 @@
     gap: 0.8rem;
   }
 }
+.reviews-section {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.review-card {
+  background: rgba(255, 255, 255, 0.04);
+  padding: 0.7rem;
+  border-radius: 0.6rem;
+  margin-bottom: 0.6rem;
+}
+
+.review-user {
+  font-weight: 600;
+  color: #86efac;
+  font-size: 0.8rem;
+}
+
+.review-rating {
+  font-size: 0.75rem;
+  color: #facc15;
+}
+
+.review-comment {
+  font-size: 0.8rem;
+  color: #d1d5db;
+}
