@@ -3,7 +3,7 @@
 This document provides a comprehensive list of all API endpoints for the Laptop Rental application.
 
 ## Base URL
-
+##
 The base URL for all API endpoints is `/api`.
 
 ---
