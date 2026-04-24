@@ -71,15 +71,21 @@ const MyBooking = () => {
     }
   };
 
-  // ✅ SUBMIT (CREATE / UPDATE)  🔥 FIXED HERE
   const handleSubmit = async () => {
     try {
-      const rentalId =
-        selectedBooking.rentalId?._id || selectedBooking.rentalId;
+      const rental = selectedBooking.rentalId;
 
+      // works for both populated & non-populated shapes
+      const rentalId = rental?._id || rental;
       const laptopId =
-        selectedBooking.rentalId?.laptopId?._id ||
-        selectedBooking.rentalId?.laptopId;
+        rental?.laptopId?._id || rental?.laptopId || selectedBooking?.laptopId;
+
+      console.log("POST DATA:", { laptopId, rentalId, rating, comment });
+
+      if (!laptopId || !rentalId) {
+        alert("Missing laptopId or rentalId");
+        return;
+      }
 
       if (existingReview) {
         await API.put(`/reviews/${existingReview._id}`, {
@@ -98,8 +104,8 @@ const MyBooking = () => {
       alert("Review saved!");
       setSelectedBooking(null);
     } catch (err) {
-      console.error(err);
-      alert("Error saving review");
+      console.error(err?.response?.data || err);
+      alert(err?.response?.data?.error || "Error saving review");
     }
   };
 
@@ -185,7 +191,6 @@ const MyBooking = () => {
         </div>
       )}
 
-      {/* ✅ REVIEW MODAL */}
       <ReviewModal
         selectedBooking={selectedBooking}
         rating={rating}

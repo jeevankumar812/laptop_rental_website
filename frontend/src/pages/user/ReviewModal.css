@@ -1,0 +1,16 @@
+.stars {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.star {
+  font-size: 28px;
+  cursor: pointer;
+  color: #555; /* default gray */
+  transition: 0.2s;
+}
+
+.star.active {
+  color: gold; /* yellow */
+}
