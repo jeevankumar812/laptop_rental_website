@@ -136,10 +136,10 @@
   padding: 12px 35px;             /* small size */
 
   border-radius: 6px;            /* less rectangle */
-  border: 1px solid #2563eb;
+  border: 1px solid #0E3386;
 
   background: transparent;
-  color: #2563eb;
+  color: #0E3386;
 
   font-size: 13px;
   font-weight: 500;
@@ -149,7 +149,7 @@
 }
 
 .laptopRentBtn:hover {
-  background: #2563eb;
+  background: #0E3386;;
   color: #fff;
 }
 

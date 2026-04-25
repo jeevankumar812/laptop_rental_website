@@ -41,7 +41,7 @@ const Laptops = () => {
       <div className="laptops-header">
         <div>
           <h2>Laptops</h2>
-          <p>Manage all laptops</p>
+          
         </div>
 
         <button
@@ -85,7 +85,7 @@ const Laptops = () => {
                 </div>
 
                 <div className="laptop-footer">
-                  <div className="price">₹{lap.pricing?.perDay}</div>
+                  <div className="admin-price">₹{lap.pricing?.perDay}/day</div>
 
                   <button
                     className="delete-btn"

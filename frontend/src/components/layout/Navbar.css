@@ -52,7 +52,7 @@
   height: 2px;
   bottom: -4px;
   left: 0;
-  background: #2563eb;
+  background: #0E3386;
   transition: 0.3s;
 }
 
@@ -95,13 +95,13 @@
 
 /* SIGNUP */
 .signup {
-  background: #2563eb;
+  background: #0E3386;
   color: #ffffff;
   border: none;
 }
 
 .signup:hover {
-  background: #1d4ed8;
+  background: #0E3386;
 }
 
 /* LOGOUT */
@@ -124,7 +124,7 @@
 }
 
 .profile:hover {
-  color: #2563eb;
+  color: #0E3386;
   transform: scale(1.1);
 }
 

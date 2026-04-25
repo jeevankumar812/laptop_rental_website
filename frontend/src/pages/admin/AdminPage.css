@@ -44,7 +44,7 @@
 
 /* Active link */
 .adminContainer .navItem.active {
-  background: #3b82f6;
+  background: #0E3386;
   color: white;
 }
 
@@ -90,7 +90,7 @@
 
 /* Buttons */
 .adminContainer button {
-  background: #3b82f6;
+  background: #0E3386;
   color: white;
   border: none;
   padding: 8px 14px;
@@ -99,5 +99,5 @@
 }
 
 .adminContainer button:hover {
-  background: #2563eb;
+  background: #0E3386;
 }

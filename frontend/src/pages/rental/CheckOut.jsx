@@ -157,16 +157,14 @@ const Checkout = () => {
             </div>
 
             <div className="checkoutFormGroup">
-              <label>Delivery Type</label>
-              <select
+            <label>Delivery Type</label>
+            <input
+                type="text"
                 className="checkoutSelect"
-                value={deliveryType}
-                onChange={(e) => setDeliveryType(e.target.value)}
-              >
-                <option value="pickup">Pickup</option>
-                <option value="delivery">Delivery</option>
-              </select>
-            </div>
+                value="Pickup"
+                disabled
+              />
+          </div>
 
             {deliveryType === "delivery" && (
               <textarea

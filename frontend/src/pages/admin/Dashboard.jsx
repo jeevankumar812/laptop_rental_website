@@ -85,7 +85,7 @@ const Dashboard = () => {
       <div className="dashboard-header">
         <div>
           <h1>Dashboard</h1>
-          <p>System overview and statistics</p>
+        
         </div>
 
         <div className="dashboard-user">

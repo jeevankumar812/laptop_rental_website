@@ -20,7 +20,7 @@
 
 /* BUTTON */
 .add-laptop-btn {
-  background: #2563eb;
+  background: #0E3386;
   color: #fff;
   border: none;
   padding: 10px 18px;
@@ -29,7 +29,7 @@
 }
 
 .add-laptop-btn:hover {
-  background: #1d4ed8;
+  background: #0E3386;
 }
 
 .admin-laptops-page {
@@ -173,7 +173,7 @@
   border-radius: 6px;
 
   border: none;                 /* cleaner look */
-  background: #3b82f6;          /* blue */
+  background: #0E3386;        /* blue */
   color: #ffffff;
 
   cursor: pointer;
@@ -182,7 +182,7 @@
 
 /* HOVER */
 .admin-laptops-page .delete-btn:hover {
-  background: #2563eb;          /* darker blue */
+  background:#0E3386;         /* darker blue */
 }
 
 /* ACTIVE (click feel) */
