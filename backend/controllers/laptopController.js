@@ -42,35 +42,47 @@ const getLaptopById = async (req, res) => {
 
 const addLaptop = async (req, res) => {
   try {
-    // 1. Get the path of the single uploaded file
     const imagePath = req.file ? req.file.path : "";
 
-    // 2. Prepare laptop data
+    const parsedPricing =
+      typeof req.body.pricing === "string"
+        ? JSON.parse(req.body.pricing)
+        : req.body.pricing;
+
     const laptopData = {
       ...req.body,
-      // Parse nested objects if they arrive as strings from FormData
+
       specs:
         typeof req.body.specs === "string"
           ? JSON.parse(req.body.specs)
           : req.body.specs,
-      pricing:
-        typeof req.body.pricing === "string"
-          ? JSON.parse(req.body.pricing)
-          : req.body.pricing,
 
-      // Store the single path in your existing array field
+      pricing: {
+        perDay: Number(parsedPricing?.perDay || 0),
+        perWeek: Number(parsedPricing?.perWeek || 0),
+        perMonth: Number(parsedPricing?.perMonth || 0),
+      },
+
+      tags:
+        typeof req.body.tags === "string"
+          ? JSON.parse(req.body.tags)
+          : req.body.tags,
+
+      totalUnits: Number(req.body.totalUnits),
+      availableUnits: Number(req.body.availableUnits || req.body.totalUnits),
+      securityDeposit: Number(req.body.securityDeposit),
+
       images: imagePath ? [imagePath] : [],
-
-      availableUnits: req.body.totalUnits || 1,
     };
 
     const laptop = await Laptop.create(laptopData);
+
     res.status(201).json(laptop);
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    console.error("🔥 BACKEND ERROR:", error); // FULL ERROR
+    res.status(500).json({ error: error.message });
   }
 };
-
 const updateLaptop = async (req, res) => {
   try {
     const { totalUnits } = req.body;

@@ -53,7 +53,7 @@ const LaptopForm = ({ onClose, onSuccess }) => {
     data.append("totalUnits", formData.totalUnits);
     data.append(
       "availableUnits",
-      formData.availableUnits || formData.totalUnits
+      formData.availableUnits || formData.totalUnits,
     );
 
     const tagsArray = formData.tags.split(",").map((tag) => tag.trim());
@@ -80,8 +80,8 @@ const LaptopForm = ({ onClose, onSuccess }) => {
 
       alert("✅ Laptop added successfully!");
 
-      onSuccess();   // refresh list
-      onClose();     // close modal
+      onSuccess(); // refresh list
+      onClose(); // close modal
     } catch (err) {
       console.error(err);
       alert("❌ Error");
@@ -91,14 +91,14 @@ const LaptopForm = ({ onClose, onSuccess }) => {
   return (
     <div className="laptopModalOverlay">
       <div className="laptopModalCard">
-
-        <span className="closeBtn" onClick={onClose}>✖</span>
+        <span className="closeBtn" onClick={onClose}>
+          ✖
+        </span>
 
         <div className="laptop-form-container">
           <h2>Add New Laptop</h2>
 
           <form onSubmit={handleSubmit}>
-
             {/* BASIC */}
             <div className="section-title">Basic Info</div>
             <div className="grid-2">
@@ -117,10 +117,22 @@ const LaptopForm = ({ onClose, onSuccess }) => {
             <div className="section-title">Specifications</div>
             <div className="grid-3">
               <input name="ram" placeholder="RAM" onChange={handleChange} />
-              <input name="storage" placeholder="Storage" onChange={handleChange} />
-              <input name="processor" placeholder="Processor" onChange={handleChange} />
+              <input
+                name="storage"
+                placeholder="Storage"
+                onChange={handleChange}
+              />
+              <input
+                name="processor"
+                placeholder="Processor"
+                onChange={handleChange}
+              />
               <input name="gpu" placeholder="GPU" onChange={handleChange} />
-              <input name="display" placeholder="Display" onChange={handleChange} />
+              <input
+                name="display"
+                placeholder="Display"
+                onChange={handleChange}
+              />
               <input name="os" placeholder="OS" onChange={handleChange} />
             </div>
 
@@ -156,31 +168,61 @@ const LaptopForm = ({ onClose, onSuccess }) => {
             {/* INVENTORY */}
             <div className="section-title">Inventory</div>
             <div className="grid-2">
-              <input type="number" name="totalUnits" placeholder="Total Units" onChange={handleChange} />
-              <input type="number" name="availableUnits" placeholder="Available Units" onChange={handleChange} />
+              <input
+                type="number"
+                name="totalUnits"
+                placeholder="Total Units"
+                onChange={handleChange}
+              />
+              <input
+                type="number"
+                name="availableUnits"
+                placeholder="Available Units"
+                onChange={handleChange}
+              />
             </div>
 
             {/* PRICING */}
             <div className="section-title">Pricing</div>
             <div className="grid-3">
-              <input type="number" name="perDay" placeholder="Per Day" onChange={handlePricingChange} />
-              <input type="number" name="perWeek" placeholder="Per Week" onChange={handlePricingChange} />
-              <input type="number" name="perMonth" placeholder="Per Month" onChange={handlePricingChange} />
+              <input
+                type="number"
+                name="perDay"
+                placeholder="Per Day"
+                onChange={handlePricingChange}
+              />
+              <input
+                type="number"
+                name="perWeek"
+                placeholder="Per Week"
+                onChange={handlePricingChange}
+              />
+              <input
+                type="number"
+                name="perMonth"
+                placeholder="Per Month"
+                onChange={handlePricingChange}
+              />
             </div>
 
             {/* SECURITY */}
             <div className="section-title">Deposit</div>
-            <input type="number" name="securityDeposit" onChange={handleChange} />
+            <input
+              type="number"
+              name="securityDeposit"
+              onChange={handleChange}
+            />
 
             {/* IMAGE */}
             <div className="section-title">Image</div>
-            <input type="file" onChange={(e) => setImageFile(e.target.files[0])} />
+            <input
+              type="file"
+              onChange={(e) => setImageFile(e.target.files[0])}
+            />
 
             <button className="publish-btn"> Publish Laptop</button>
-
           </form>
         </div>
-
       </div>
     </div>
   );

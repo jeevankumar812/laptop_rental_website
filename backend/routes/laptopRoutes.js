@@ -12,7 +12,7 @@ import { admin } from "../middleware/adminMiddleware.js";
 import { uploadLaptop } from "../middleware/uploadMiddleware.js";
 import validate from "../middleware/validate.js";
 import { addLaptopSchema, updateLaptopSchema } from "../validators/index.js";
-
+import parseLaptopFormData from "../middleware/parseLaptopFormData.js";
 const router = Router();
 
 router.get("/", getAllLaptops);
@@ -22,6 +22,7 @@ router.post(
   protect,
   admin,
   uploadLaptop.single("image"),
+  parseLaptopFormData,
   validate(addLaptopSchema),
   addLaptop,
 );
