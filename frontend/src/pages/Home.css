@@ -1,27 +1,85 @@
+/* ===== ROOT THEME ===== */
+:root {
+  --primary-blue: #3b82f6;
+  --primary-blue-light: #60a5fa;
+  --primary-blue-soft: #eff6ff;
+
+  --text-dark: #0f172a;
+  --text-muted: #64748b;
+
+  --bg-main: #ffffff;
+  --bg-soft: #f8fafc;
+}
+
 /* ===== FULL PAGE ===== */
 .home-container {
   width: 100%;
   min-height: 100vh;
-  background-color: #020617;
-  color: white;
+
+  background: var(--bg-main);
+  color: var(--text-dark);
 
   display: flex;
   flex-direction: column;
 }
 
-/* ===== SECTION ===== */
+/* ===== CATEGORY SECTION ===== */
 .category-section {
   width: 100%;
-  margin-top: 80px;   /* 🔥 increased spacing (was 50px) */
-  padding: 0 30px;
+  margin-top: 80px;
+  padding: 0 50px;
+
   box-sizing: border-box;
 
-  min-height: 300px;  /* 🔥 adds height to each section */
+  /* soft section separation */
+  background: var(--bg-main);
 }
 
-/* TITLE */
+/* ===== SECTION TITLE ===== */
 .category-section h2 {
-  margin-bottom: 25px;  /* 🔥 more spacing */
-  font-size: 22px;
+  margin-bottom: 28px;
+
+  font-size: 26px;
   font-weight: 600;
+
+  color: var(--text-dark);
+
+  position: relative;
+}
+
+/* 🔥 Underline accent */
+.category-section h2::after {
+  content: "";
+  display: block;
+  width: 50px;
+  height: 4px;
+
+  margin-top: 8px;
+
+  background: var(--primary-blue);
+  border-radius: 10px;
+}
+
+/* ===== SPACING BETWEEN SECTIONS ===== */
+.category-section + .category-section {
+  margin-top: 60px;
+}
+
+/* ===== OPTIONAL: SECTION BACKGROUND STRIP ===== */
+/* (gives subtle separation like modern apps) */
+.category-section:nth-child(even) {
+  background: var(--bg-soft);
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .category-section {
+    padding: 0 20px;
+  }
+
+  .category-section h2 {
+    font-size: 20px;
+  }
 }

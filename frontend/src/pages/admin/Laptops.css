@@ -1,6 +1,36 @@
 /* ===== PAGE SCOPE ===== */
 
+/* HEADER */
+.admin-laptops-page .laptops-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
 
+.admin-laptops-page .laptops-header h2 {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.admin-laptops-page .laptops-header p {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+/* BUTTON */
+.add-laptop-btn {
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.add-laptop-btn:hover {
+  background: #1d4ed8;
+}
 
 .admin-laptops-page {
   width: 100%;
@@ -23,6 +53,7 @@
   display: flex;
   flex-direction: column;
   transition: all 0.25s ease;
+ 
 }
 
 /* hover polish */

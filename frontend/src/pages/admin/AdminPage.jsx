@@ -29,9 +29,7 @@ function AdminPage() {
 
       {/* Main Content */}
       <main className="mainContent">
-        <header className="topBar">
-          <h1>Admin Panel</h1>
-        </header>
+        
 
         <div className="contentArea">
           <Routes>
