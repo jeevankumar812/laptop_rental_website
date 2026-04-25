@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 import "./Navbar.css";
-
+import logo from "../assets/laplogo.png";
 const Navbar = ({ user, setUser }) => {
   const navigate = useNavigate();
 
@@ -15,10 +15,10 @@ const Navbar = ({ user, setUser }) => {
     <header className="navbar">
       {/* LEFT - LOGO */}
       <div className="nav-left">
-        <Link to="/" className="logo">
-          LaptopRent
-        </Link>
-      </div>
+  <Link to="/" className="logo">
+    <img src={logo} alt="LaptopRent" className="logo-img" />
+  </Link>
+</div>
 
       {/* CENTER - LINKS */}
       <nav className="nav-center">

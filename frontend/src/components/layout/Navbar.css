@@ -138,3 +138,9 @@
     display: none; /* hide links on mobile (can add menu later) */
   }
 }
+
+.logo-img {
+  height: 120px;   /* adjust size */
+  width: auto;
+  object-fit: contain;
+}

@@ -67,7 +67,7 @@
 }
 
 .reviewTextarea:focus {
-  border-color: #2563eb;
+  border-color: #0E3386;
 }
 
 /* ===== BUTTON AREA ===== */
@@ -89,12 +89,12 @@
 
 /* ===== UPDATE BUTTON ===== */
 .updateBtn {
-  background: #2563eb;
+  background: #0E3386;
   color: white;
 }
 
 .updateBtn:hover {
-  background: #1d4ed8;
+  background: #0E3386;
 }
 
 /* ===== CANCEL BUTTON ===== */
