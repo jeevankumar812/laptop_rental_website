@@ -1,12 +1,12 @@
 /* ===== FONT ===== */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap");
 
 /* ===== PAGE ===== */
 .admin-rentals-page {
   width: 100%;
   flex: 1;
   background: #f5f7fb;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 /* ===== CONTAINER ===== */
@@ -27,7 +27,6 @@
   font-size: 24px;
   font-weight: 600;
   color: #0f172a;
-  letter-spacing: -0.3px;
 }
 
 .count {
@@ -47,9 +46,8 @@
   background: #ffffff;
   border: 1px solid #e5e7eb;
   border-radius: 14px;
-
   padding: 20px;
-  min-height: 220px;
+  min-height: 260px;
 
   display: flex;
   flex-direction: column;
@@ -58,7 +56,6 @@
   transition: all 0.25s ease;
 }
 
-/* ✨ HOVER */
 .rental-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
@@ -84,7 +81,7 @@
   color: #111827;
 }
 
-/* ===== SECTION BOX ===== */
+/* ===== SECTION ===== */
 .rental-section {
   padding: 12px;
   border-radius: 10px;
@@ -92,7 +89,6 @@
   background: #f9fafb;
 }
 
-/* TEXT */
 .rental-section p {
   font-size: 13px;
   color: #374151;
@@ -104,12 +100,81 @@
   font-weight: 500;
 }
 
+/* ===== STATUS ===== */
+.status {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+/* COLORS */
+.status.pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.status.active {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.status.returned {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.status.cancelled {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
 /* ===== LOADING ===== */
 .rentals-loading {
   padding: 50px;
   text-align: center;
   color: #6b7280;
   font-size: 14px;
+}
+
+/* ===== RETURN BUTTON ===== */
+.return-btn {
+  margin-top: 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background: #2563eb;
+  color: white;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.return-btn:hover {
+  background: #1d4ed8;
+}
+
+/* ===== FINE ===== */
+.fine {
+  color: #dc2626;
+  font-weight: 600;
+}
+
+.no-fine {
+  color: #16a34a;
+  font-weight: 500;
+}
+
+/* ===== LATE BADGE ===== */
+.late-badge {
+  margin-left: 8px;
+  background: #dc2626;
+  color: white;
+  padding: 3px 8px;
+  border-radius: 8px;
+  font-size: 11px;
 }
 
 /* ===== RESPONSIVE ===== */

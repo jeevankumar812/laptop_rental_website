@@ -18,7 +18,7 @@ router.get("/", protect, getUserRentals);
 router.get("/admin", protect, admin, adminGetRental);
 router.get("/:id", protect, getRentalById);
 router.post("/", protect, validate(createRentalSchema), createRental);
-router.put("/:id", protect, returnLaptop);
+router.put("/:id", protect, admin, returnLaptop);
 router.delete("/:id", protect, cancelRental);
 
 export default router;
