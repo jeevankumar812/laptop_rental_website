@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
 import Home from "./pages/Home";
 import Signup from "./pages/auth/Signup";
@@ -13,13 +13,31 @@ import ForgotPassword from "./components/forms/ForgotPassword";
 import ResetPassword from "./components/forms/ResetPassword";
 import LaptopDetails from "./pages/rental/LaptopDetails";
 import LaptopPage from "./pages/rental/LaptopPage";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 
 const App = () => {
   const [user, setUser] = useState(() =>
-    JSON.parse(localStorage.getItem("user"))
+    JSON.parse(localStorage.getItem("user")),
   );
+
+  const location = useLocation();
+  const isAdmin = location.pathname.startsWith("/admin");
+
+  // Prevent body scroll on admin pages — only the contentArea should scroll
+  useEffect(() => {
+    if (isAdmin) {
+      document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+    };
+  }, [isAdmin]);
 
   const updateUser = (updatedUser) => {
     localStorage.setItem("user", JSON.stringify(updatedUser));

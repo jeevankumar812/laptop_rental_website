@@ -1,280 +1,237 @@
-/* LaptopDetails.css */
+/* ===== GOOGLE FONT ===== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 
-.details-page {
+/* ===== ROOT WRAPPER (ISOLATED) ===== */
+.laptopDetailsWrapper {
+  font-family: 'Inter', sans-serif;
+  background: #f5f7fb;
   min-height: 100vh;
-  background: linear-gradient(135deg, #020617, #022c22);
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1.5rem;
-  overflow-y: auto; /* Allow page scroll if needed, but content will be compact */
+  padding: 30px 20px;
+  color: #111827;
 }
 
-/* WRAPPER - More compact */
-.details-wrapper {
-  width: 100%;
-  max-width: 1200px;
+/* ===== MAIN GRID ===== */
+.laptopDetailsLayout {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
+  grid-template-columns: 1.2fr 1.8fr;
+  gap: 30px;
   align-items: start;
-  background: rgba(255, 255, 255, 0.02);
-  border-radius: 1.5rem;
-  padding: 1.75rem;
-  backdrop-filter: blur(2px);
 }
 
-/* IMAGE SECTION - Fixed size to prevent overflow */
-.image-section {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+/* ===== CARD BASE ===== */
+.laptopDetailsCard {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 20px;
+  transition: all 0.25s ease;
+  position: relative;
+}
+
+.laptopDetailsCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+/* ===== IMAGE SECTION ===== */
+.laptopImageSection {
   position: sticky;
-  top: 1rem;
+  top: 90px;
 }
 
-.image-section img {
+.laptopImageSection img {
   width: 100%;
-  max-width: 380px;
-  border-radius: 1.25rem;
-  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.5);
+  border-radius: 12px;
   object-fit: cover;
+  
 }
 
-/* INFO SECTION - Tighter spacing */
-.info-section {
+/* ===== INFO SECTION ===== */
+.laptopInfoSection {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 20px;
 }
 
-/* Title Area - Compact */
-.info-section > div:first-child {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  padding-bottom: 0.5rem;
+/* ===== TITLE ===== */
+.laptopTitle {
+  font-size: 26px;
+  font-weight: 600;
 }
 
-.info-section h1 {
-  font-size: 1.6rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  background: linear-gradient(135deg, #fff, #86efac);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  margin-bottom: 0.2rem;
+.laptopCategory {
+  font-size: 14px;
+  color: #6b7280;
 }
 
-.category {
-  color: #86efac;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-/* AVAILABILITY - Smaller */
-.availability {
-  display: flex;
+/* ===== AVAILABILITY ===== */
+.laptopAvailability {
+  display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  background: rgba(34, 197, 94, 0.15);
-  padding: 0.4rem 0.8rem;
-  border-radius: 2rem;
-  width: fit-content;
-  font-size: 0.8rem;
+  gap: 6px;
+  font-size: 13px;
+  color: #16a34a;
   font-weight: 500;
-  border: 1px solid rgba(34, 197, 94, 0.3);
 }
 
-/* SPECS GRID - More compact */
-.specs-grid {
+/* ===== SPECS GRID ===== */
+.laptopSpecsGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 0.6rem;
+  gap: 12px;
 }
 
-.specs-grid div {
-  background: rgba(255, 255, 255, 0.05);
-  padding: 0.5rem 0.75rem;
-  border-radius: 0.6rem;
-  font-size: 0.8rem;
+.laptopSpecItem {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  transition: all 0.2s ease;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  gap: 8px;
+  font-size: 13px;
+  background: #f9fafb;
+  padding: 10px;
+  border-radius: 8px;
 }
 
-.specs-grid div:hover {
-  background: rgba(34, 197, 94, 0.1);
-  border-color: rgba(34, 197, 94, 0.3);
+/* ===== PRICING ===== */
+.laptopPricingBox h3 {
+  margin-bottom: 10px;
 }
 
-.specs-grid svg {
-  flex-shrink: 0;
-  color: #22c55e;
-  width: 14px;
-  height: 14px;
-}
-
-/* PRICING BOX - More compact */
-.pricing-box {
-  background: linear-gradient(135deg, #064e3b, #022c22);
-  padding: 0.9rem 1.2rem;
-  border-radius: 0.9rem;
-  border: 1px solid rgba(34, 197, 94, 0.2);
-}
-
-.pricing-box h3 {
-  margin-bottom: 0.5rem;
-  font-size: 0.85rem;
+.laptopPriceMain {
+  font-size: 24px;
   font-weight: 600;
-  color: #86efac;
 }
 
-.price-main {
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: #22c55e;
-  margin-bottom: 0.3rem;
+.laptopPriceMain span {
+  font-size: 14px;
+  color: #6b7280;
 }
 
-.price-main span {
-  font-size: 0.75rem;
-  color: #9ca3af;
-  font-weight: normal;
+.laptopPriceSub {
+  margin-top: 8px;
+  font-size: 13px;
+  color: #374151;
 }
 
-.price-sub {
-  display: flex;
-  gap: 0.8rem;
-  flex-wrap: wrap;
+.laptopPriceSub p {
+  margin: 3px 0;
 }
 
-.price-sub p {
-  font-size: 0.75rem;
-  color: #d1d5db;
-  background: rgba(0, 0, 0, 0.2);
-  padding: 0.2rem 0.6rem;
-  border-radius: 2rem;
+/* ===== EXTRA INFO ===== */
+.laptopExtraInfo p {
+  font-size: 14px;
+  margin: 4px 0;
 }
 
-/* EXTRA INFO - Compact */
-.extra-info {
-  display: flex;
-  gap: 1.2rem;
-  flex-wrap: wrap;
-  background: rgba(255, 255, 255, 0.03);
-  padding: 0.5rem 0.8rem;
-  border-radius: 0.6rem;
+.laptopExtraInfo span {
+  font-weight: 500;
 }
 
-.extra-info p {
-  font-size: 0.8rem;
-  color: #9ca3af;
-}
-
-.extra-info span {
-  color: white;
-  font-weight: 600;
-  margin-left: 0.4rem;
-}
-
-/* BUTTON - Prominent but compact */
-.rent-btn {
-  margin-top: 0.25rem;
-  padding: 0.7rem 1.5rem;
-  background: linear-gradient(135deg, #22c55e, #16a34a);
-  border-radius: 0.7rem;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: white;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  width: 100%;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.rent-btn:hover {
-  background: linear-gradient(135deg, #16a34a, #15803d);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 16px -5px rgba(34, 197, 94, 0.3);
-}
-
-/* LOADING STATE */
-.loading {
-  color: white;
-  text-align: center;
-  font-size: 1.2rem;
-  display: flex;
+/* ===== BUTTON ===== */
+.laptopRentBtn {
+  display: inline-flex;          /* prevents stretching */
+  align-items: center;
   justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #020617, #022c22);
+
+  width: fit-content;            /* shrink to content */
+  padding: 12px 35px;             /* small size */
+
+  border-radius: 6px;            /* less rectangle */
+  border: 1px solid #0E3386;
+
+  background: transparent;
+  color: #0E3386;
+
+  font-size: 13px;
+  font-weight: 500;
+
+  cursor: pointer;
+  transition: 0.2s ease;
 }
 
-/* RESPONSIVE */
+.laptopRentBtn:hover {
+  background: #0E3386;;
+  color: #fff;
+}
+
+/* ===== REVIEWS ===== */
+.laptopReviewsSection {
+  margin-top: 30px;
+}
+
+.laptopReviewsSection h3 {
+  margin-bottom: 15px;
+}
+
+/* ===== REVIEW CARD ===== */
+.laptopReviewCard {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 14px;
+  margin-bottom: 12px;
+}
+
+.laptopReviewHeader {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.laptopReviewUser {
+  font-weight: 500;
+}
+
+.laptopReviewRating {
+  color: #facc15;
+}
+
+.laptopReviewComment {
+  font-size: 13px;
+  color: #374151;
+}
+
+/* ===== NO REVIEWS ===== */
+.laptopNoReviews {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* ===== LOADING ===== */
+.laptopLoading {
+  text-align: center;
+  padding: 50px;
+  font-size: 18px;
+}
+
+/* ===== RESPONSIVE ===== */
 @media (max-width: 900px) {
-  .details-page {
-    padding: 1rem;
-  }
-
-  .details-wrapper {
+  .laptopDetailsLayout {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
-    padding: 1.25rem;
   }
 
-  .image-section {
+  .laptopImageSection {
     position: static;
   }
-
-  .image-section img {
-    max-width: 280px;
-  }
-
-  .info-section {
-    text-align: left;
-  }
-
-  .availability {
-    margin: 0 auto 0 0;
-  }
-
-  .specs-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .price-sub {
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
+}
+/* ===== LOCK PAGE HEIGHT ===== */
+.laptopDetailsWrapper {
+  height: 100vh;
+  overflow: hidden; /* stops full page scroll */
 }
 
-@media (max-width: 480px) {
-  .details-wrapper {
-    padding: 1rem;
-  }
-
-  .info-section h1 {
-    font-size: 1.3rem;
-  }
-
-  .price-main {
-    font-size: 1.3rem;
-  }
-
-  .specs-grid div {
-    padding: 0.45rem 0.65rem;
-    font-size: 0.75rem;
-  }
-
-  .extra-info {
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 0.8rem;
-  }
+/* ===== INTERNAL SCROLL (RIGHT SIDE) ===== */
+.laptopInfoSection {
+  max-height: calc(100vh - 80px);
+  overflow-y: auto;
+  padding-right: 5px;
 }
+
+/* ===== REVIEWS SCROLL ===== */
+.laptopReviewsSection {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+
+

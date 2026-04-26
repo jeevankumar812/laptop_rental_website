@@ -33,6 +33,11 @@ const userSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    kycStatus: {
+      type: String,
+      enum: ["pending", "approved", "rejected"],
+      default: "pending",
+    },
     kycDocument: {
       type: String,
       default: null,

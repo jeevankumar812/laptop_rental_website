@@ -37,8 +37,8 @@ const Signup = () => {
   };
 
   return (
-    <div className="auth-container">
-      <form className="auth-form" onSubmit={handleSubmit}>
+    <div className="authPage-container">
+      <form className="authPage-form" onSubmit={handleSubmit}>
         <h2>Signup</h2>
 
         <input name="name" placeholder="Full Name" onChange={handleChange} required />
@@ -53,7 +53,6 @@ const Signup = () => {
 
         <button type="submit">Signup</button>
 
-        {/* 🔥 SWITCH TO LOGIN */}
         <p>
           Already registered?{" "}
           <Link to="/login">Login</Link>

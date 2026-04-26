@@ -144,12 +144,13 @@ const uploadKYC = async (req, res) => {
     }
 
     // 2. Find user and update document path
-    // We set kycVerified to false to require admin re-approval on new uploads
+    // We set kycStatus to "pending" to require admin re-approval on new uploads
     const updatedUser = await User.findByIdAndUpdate(
       req.user._id,
       {
         kycDocument: req.file.path,
         kycVerified: false,
+        kycStatus: "pending",
       },
       { returnDocument: "after", runValidators: true },
     ).select("-passwordHash");
@@ -292,6 +293,49 @@ const getAllUsers = async (req, res) => {
   }
 };
 
+const updateKYCStatus = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { status } = req.body;
+    const allowedStatuses = ["approved", "rejected"];
+
+    if (!allowedStatuses.includes(status)) {
+      return res
+        .status(400)
+        .json({ message: "Invalid status. Use 'approved' or 'rejected'" });
+    }
+
+    const user = await User.findById(id);
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found",
+      });
+    }
+
+    if (user.kycStatus === "approved") {
+      return res.status(400).json({
+        message: "KYC already approved",
+      });
+    }
+
+    user.kycStatus = status;
+
+    if (status === "approved") {
+      user.kycVerified = true;
+    } else {
+      user.kycVerified = false;
+    }
+
+    await user.save();
+    res.status(200).json({
+      message: `KYC ${status} successfully`,
+      user,
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 export {
   registerUser,
   loginUser,
@@ -301,4 +345,5 @@ export {
   uploadKYC,
   forgotPassword,
   resetPassword,
+  updateKYCStatus,
 };

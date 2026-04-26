@@ -26,9 +26,10 @@ const Checkout = () => {
     rentedFrom && rentedTo
       ? Math.max(
           Math.ceil(
-            (new Date(rentedTo) - new Date(rentedFrom)) / (1000 * 60 * 60 * 24),
+            (new Date(rentedTo) - new Date(rentedFrom)) /
+              (1000 * 60 * 60 * 24)
           ),
-          0,
+          0
         )
       : 0;
 
@@ -43,7 +44,6 @@ const Checkout = () => {
       deliveryType,
       deliveryAddress: address,
     });
-
     return res.data._id;
   };
 
@@ -51,7 +51,6 @@ const Checkout = () => {
     const res = await API.post("/payments/create-order", {
       rentalId,
     });
-
     return res.data;
   };
 
@@ -60,16 +59,12 @@ const Checkout = () => {
       ...paymentData,
       rentalId,
     });
-
     navigate(`/rental-success/${rentalId}`);
   };
 
   const handleKYCSuccess = () => {
-    // Optionally refresh user data or show success message
-    setError("KYC document submitted! Please wait for admin verification.");
-    setTimeout(() => {
-      setError(null);
-    }, 3000);
+    setError("KYC submitted! Wait for admin verification.");
+    setTimeout(() => setError(null), 3000);
   };
 
   const handlePayment = async () => {
@@ -95,27 +90,13 @@ const Checkout = () => {
       const razor = new window.Razorpay(options);
       razor.open();
     } catch (err) {
-      console.error("Payment Error:", err);
+      console.error(err);
 
-      // Handle KYC verification error
       if (err.response?.status === 403) {
-        const errorMessage = err.response?.data?.error || "";
-
-        if (
-          errorMessage.toLowerCase().includes("kyc") ||
-          errorMessage.toLowerCase().includes("verification")
-        ) {
-          setShowKYCModal(true);
-          setError(
-            "KYC verification required. Please complete your KYC to continue.",
-          );
-        } else {
-          setError(errorMessage);
-        }
-      } else if (err.response?.status === 400) {
-        setError(err.response?.data?.error || "Invalid rental details");
+        setShowKYCModal(true);
+        setError("KYC verification required.");
       } else {
-        setError("Failed to process payment. Please try again.");
+        setError("Payment failed. Try again.");
       }
     } finally {
       setLoading(false);
@@ -123,84 +104,115 @@ const Checkout = () => {
   };
 
   return (
-    <div className="checkout-container">
-      <h1>Checkout</h1>
+    <div className="checkoutPageWrapper">
+      <h1 className="checkoutPageTitle">Checkout</h1>
 
-      {/* Error Message */}
-      {error && (
-        <div className="error-alert">
-          <span>❌ {error}</span>
-          <button onClick={() => setError(null)}>Dismiss</button>
+      {/* ERROR */}
+      {error && <div className="checkoutErrorBox">❌ {error}</div>}
+
+      <div className="checkoutPageLayout">
+        {/* ================= LEFT ================= */}
+        <div className="checkoutLeftSection">
+
+          {/* PRODUCT CARD */}
+          <div className="checkoutCard checkoutProductCard">
+            <img
+              src={`${baseURL}${laptop.images?.[0]}`}
+              alt={laptop.model}
+              className="checkoutProductImg"
+            />
+
+            <div className="checkoutProductInfo">
+              <h3>{laptop.model}</h3>
+              <p>₹{laptop.pricing?.perDay} / day</p>
+              <p>Deposit: ₹{laptop.securityDeposit}</p>
+              <p>{laptop.availableUnits} units available</p>
+            </div>
+          </div>
+
+          {/* FORM CARD */}
+          <div className="checkoutCard checkoutFormCard">
+            <h3>Rental Details</h3>
+
+            <div className="checkoutFormGroup">
+              <label>Start Date</label>
+              <input
+                type="date"
+                className="checkoutInput"
+                value={rentedFrom}
+                min={new Date().toISOString().split("T")[0]}
+                onChange={(e) => setRentedFrom(e.target.value)}
+              />
+            </div>
+
+            <div className="checkoutFormGroup">
+              <label>End Date</label>
+              <input
+                type="date"
+                className="checkoutInput"
+                value={rentedTo}
+                min={rentedFrom}
+                onChange={(e) => setRentedTo(e.target.value)}
+              />
+            </div>
+
+            <div className="checkoutFormGroup">
+            <label>Delivery Type</label>
+            <input
+                type="text"
+                className="checkoutSelect"
+                value="Pickup"
+                disabled
+              />
+          </div>
+
+            {deliveryType === "delivery" && (
+              <textarea
+                className="checkoutTextarea"
+                placeholder="Enter delivery address"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+              />
+            )}
+          </div>
         </div>
-      )}
 
-      {/* Laptop Summary */}
-      <div className="summary">
-        <img src={`${baseURL}${laptop.images?.[0]}`} alt={laptop.model} />
-        <h3>{laptop.model}</h3>
-        <p>₹{laptop.pricing?.perDay} / day</p>
-        <p>Security Deposit: ₹{laptop.securityDeposit}</p>
-        <p>{laptop.availableUnits} units available</p>
+        {/* ================= RIGHT ================= */}
+        <div className="checkoutRightSection">
+          <div className="checkoutCard checkoutPriceCard">
+            <h3>Price Details</h3>
+
+            <div className="checkoutPriceRow">
+              <span>Days</span>
+              <span>{days}</span>
+            </div>
+
+            <div className="checkoutPriceRow">
+              <span>Base Price</span>
+              <span>₹{baseAmount}</span>
+            </div>
+
+            <div className="checkoutPriceRow">
+              <span>Security Deposit</span>
+              <span>₹{laptop.securityDeposit}</span>
+            </div>
+
+            <div className="checkoutTotal">
+              Total: ₹{totalAmount}
+            </div>
+
+            <button
+              className="checkoutPayBtn"
+              onClick={handlePayment}
+              disabled={!rentedFrom || !rentedTo || days <= 0 || loading}
+            >
+              {loading ? "Processing..." : "Pay Now"}
+            </button>
+          </div>
+        </div>
       </div>
 
-      {/* Rental Details */}
-      <div className="rental-details">
-        <h2>Rental Details</h2>
-
-        <label>Start Date</label>
-        <input
-          type="date"
-          value={rentedFrom}
-          min={new Date().toISOString().split("T")[0]}
-          onChange={(e) => setRentedFrom(e.target.value)}
-        />
-
-        <label>End Date</label>
-        <input
-          type="date"
-          value={rentedTo}
-          min={rentedFrom}
-          onChange={(e) => setRentedTo(e.target.value)}
-        />
-
-        <label>Delivery Type</label>
-        <select
-          value={deliveryType}
-          onChange={(e) => setDeliveryType(e.target.value)}
-        >
-          <option value="pickup">Pickup</option>
-          <option value="delivery">Delivery</option>
-        </select>
-
-        {deliveryType === "delivery" && (
-          <textarea
-            placeholder="Enter delivery address"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-          />
-        )}
-      </div>
-
-      {/* Price Breakdown */}
-      <div className="price">
-        <h2>Price Details</h2>
-        <p>Days: {days}</p>
-        <p>
-          ₹{laptop.pricing?.perDay} × {days} days = ₹{baseAmount}
-        </p>
-        <p>Security Deposit: ₹{laptop.securityDeposit}</p>
-        <h3>Total: ₹{totalAmount}</h3>
-      </div>
-
-      <button
-        className="pay-btn"
-        onClick={handlePayment}
-        disabled={!rentedFrom || !rentedTo || days <= 0 || loading}
-      >
-        {loading ? "Processing..." : "Pay Now"}
-      </button>
-
-      {/* KYC Modal Component */}
+      {/* KYC MODAL */}
       <KYCModal
         isOpen={showKYCModal}
         onClose={() => setShowKYCModal(false)}

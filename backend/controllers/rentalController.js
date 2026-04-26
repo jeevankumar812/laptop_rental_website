@@ -94,10 +94,11 @@ const returnLaptop = async (req, res) => {
 
     // Simple Late Fee Logic: If return date > rentedTo date
     if (now > rental.rentedTo) {
-      const diffTime = Math.abs(now - rental.rentedTo);
-      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-      // Assuming a flat late fee of ₹500/day for example
-      lateFee = diffDays * 500;
+      const diffMs = now - rental.rentedTo;
+
+      const diffDays = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+
+      lateFee = diffDays * 500; // Flat ₹500 per day late fee
     }
 
     rental.status = "returned";
@@ -108,11 +109,21 @@ const returnLaptop = async (req, res) => {
 
     // Restore Laptop Inventory
     const laptop = await Laptop.findById(rental.laptopId);
-    laptop.availableUnits += 1;
-    laptop.status = "available";
-    await laptop.save();
+    if (laptop) {
+      laptop.availableUnits += 1;
 
-    res.status(200).json({ message: "Laptop returned", rental });
+      // Only mark available if units exist
+      if (laptop.availableUnits > 0) {
+        laptop.status = "available";
+      }
+
+      await laptop.save();
+    }
+    res.status(200).json({
+      message: "Laptop returned successfully",
+      lateFee,
+      rental,
+    });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -146,7 +157,7 @@ const cancelRental = async (req, res) => {
 const getRentalById = async (req, res) => {
   try {
     const rental = await Rental.findById(req.params.id)
-      .populate("laptopId", "brand model pricing")
+      .populate("laptopId", "brand model pricing specs images securityDeposit")
       .populate("userId", "name email");
     if (!rental) return res.status(404).json({ error: "Rental not found" });
     res.status(200).json(rental);
@@ -161,7 +172,29 @@ const adminGetRental = async (req, res) => {
       .populate("laptopId", "brand model pricing")
       .populate("userId", "name")
       .sort("-createdAt");
-    res.status(200).json(rentals);
+
+    const now = new Date();
+
+    const updatedRentals = rentals.map((r) => {
+      let lateFee = r.pricing?.lateFee || 0;
+
+      if (r.status === "active" && now > r.rentedTo) {
+        const diffDays = Math.ceil((now - r.rentedTo) / (1000 * 60 * 60 * 24));
+
+        lateFee = diffDays * 500;
+      }
+
+      return {
+        ...r.toObject(),
+        pricing: {
+          ...r.pricing,
+          lateFee,
+          totalAmount: r.pricing.baseAmount + lateFee,
+        },
+      };
+    });
+
+    res.status(200).json(updatedRentals);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

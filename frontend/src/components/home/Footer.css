@@ -1,7 +1,7 @@
 /* ===== FOOTER ===== */
 .footer {
-  background: #000;
-  border-top: 1px solid #111;
+  background: #ffffff;
+  border-top: 1px solid #e5e7eb;
   padding: 50px 20px 20px;
 }
 
@@ -22,43 +22,47 @@
   min-width: 220px;
 }
 
-/* HEADINGS */
+/* ===== HEADINGS ===== */
 .footer-section h2 {
-  color: white;
+  color: #000000;
   font-size: 20px;
   margin-bottom: 10px;
 }
 
 .footer-section h4 {
-  color: #22c55e;
+  color: #0E3386; /* 🔥 brand color */
   margin-bottom: 10px;
 }
 
-/* TEXT */
+/* ===== TEXT ===== */
 .footer-section p {
-  color: #888;
+  color: #4b5563;
   font-size: 14px;
   margin-bottom: 6px;
+  line-height: 1.5;
 }
 
-/* LINKS */
+/* ===== LINKS ===== */
 .footer-section a {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  color: #aaa;
+
+  color: #374151;
   text-decoration: none;
   font-size: 14px;
-  transition: 0.3s;
+
+  transition: 0.25s;
 }
 
 .footer-section a:hover {
-  color: #22c55e;
+  color: #0E3386; /* 🔥 hover blue */
 }
 
-/* ICONS */
+/* ===== ICONS ===== */
 .footer-section svg {
   font-size: 14px;
+  color: #0E3386;
 }
 
 /* ===== BOTTOM ===== */
@@ -66,10 +70,10 @@
   text-align: center;
   margin-top: 30px;
   padding-top: 15px;
-  border-top: 1px solid #111;
+  border-top: 1px solid #e5e7eb;
 }
 
 .footer-bottom p {
   font-size: 13px;
-  color: #666;
+  color: #6b7280;
 }

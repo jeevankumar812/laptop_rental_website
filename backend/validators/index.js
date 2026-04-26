@@ -62,19 +62,27 @@ const laptopSpecsSchema = z.object({
 });
 
 const laptopPricingSchema = z.object({
-  perDay: z.number().positive("Price per day must be positive"),
-  weeklyDiscount: z.number().min(0).optional(),
-  monthlyDiscount: z.number().min(0).optional(),
+  perDay: z.number().positive(),
+  perWeek: z.number().positive(),
+  perMonth: z.number().positive(),
 });
 
 const addLaptopSchema = z.object({
-  brand: z.string().min(1, "Brand is required"),
-  model: z.string().min(1, "Model is required"),
-  specs: z.union([laptopSpecsSchema, z.string()]),
-  pricing: z.union([laptopPricingSchema, z.string()]),
-  condition: z.enum(["excellent", "good", "fair"]),
-  totalUnits: z.number().int().positive("Total units must be positive"),
-  securityDeposit: z.number().positive("Security deposit must be positive"),
+  brand: z.string().min(1),
+  model: z.string().min(1),
+
+  specs: laptopSpecsSchema,
+  pricing: laptopPricingSchema,
+
+  category: z.enum(["Office", "Gaming", "Student", "Workstation"]),
+  condition: z.enum(["new", "good", "fair"]),
+  status: z.enum(["available", "rented", "maintenance"]).optional(),
+
+  totalUnits: z.number().int().positive(),
+  availableUnits: z.number().optional(),
+
+  securityDeposit: z.number().positive(),
+
   tags: z.array(z.string()).optional(),
 });
 

@@ -27,23 +27,23 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className="auth-container">
-      <div className="auth-form">
+    <div className="forgotPage-container">
+      <div className="forgotPage-form">
         <h2>Forgot your password?</h2>
-        <p className="auth-description">
-          Enter your email address and we'll send you a link to reset your
-          password.
+
+        <p className="forgotPage-description">
+          Enter your email address and we'll send you a link to reset your password.
         </p>
 
         {message && (
-          <div className="alert-success">
-            <div>{message}</div>
+          <div className="forgotPage-success">
+            {message}
           </div>
         )}
 
         {error && (
-          <div className="alert-error">
-            <div>{error}</div>
+          <div className="forgotPage-error">
+            {error}
           </div>
         )}
 
@@ -61,7 +61,7 @@ const ForgotPassword = () => {
             {isLoading ? "Sending..." : "Send Reset Link"}
           </button>
 
-          <div className="text-center">
+          <div className="forgotPage-footer">
             <Link to="/login">Back to Login</Link>
           </div>
         </form>

@@ -8,7 +8,9 @@ const addReview = async (req, res) => {
   try {
     // 1. Destructure rentalId from the body
     const { laptopId, rentalId, rating, comment } = req.body;
-
+    if (!rating || rating < 1 || rating > 5) {
+      return res.status(400).json({ error: "Rating must be 1-5" });
+    }
     // 2. Verify this specific rental belongs to the user and is returned
     const completedRental = await Rental.findOne({
       _id: rentalId,
@@ -70,7 +72,43 @@ const getUserReviews = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+const getReviewByRental = async (req, res) => {
+  try {
+    const review = await Review.findOne({
+      rentalId: req.params.rentalId,
+      userId: req.user._id,
+    });
 
+    res.json(review); // null if not exists
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+// PUT /api/reviews/:id
+const updateReview = async (req, res) => {
+  try {
+    const { rating, comment } = req.body;
+
+    const review = await Review.findOne({
+      _id: req.params.id,
+      userId: req.user._id,
+    });
+
+    if (!review) {
+      return res.status(404).json({ error: "Review not found" });
+    }
+
+    review.rating = rating;
+    review.comment = comment;
+
+    await review.save();
+
+    res.json(review);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
 // Delete a review (Admin Only)
 // DELETE /api/reviews/:id
 const deleteReview = async (req, res) => {
@@ -105,4 +143,6 @@ export {
   getUserReviews,
   deleteReview,
   getAllReviews,
+  getReviewByRental,
+  updateReview,
 };

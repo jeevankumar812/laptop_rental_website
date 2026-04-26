@@ -1,0 +1,43 @@
+/* ===== FONT (SCOPED SAFE) ===== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+/* ===== PAGE WRAPPER ===== */
+.kyc-page-wrapper {
+  width: 100%;
+  padding: 30px 35px;
+  font-family: 'Inter', sans-serif;
+}
+
+/* ===== TITLES ===== */
+.kyc-page-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #0f172a;
+  margin-bottom: 20px;
+}
+
+.kyc-section-title {
+  font-size: 16px;
+  margin: 25px 0 15px;
+  color: #374151;
+}
+
+/* ===== GRID (SAFE & ISOLATED) ===== */
+.kyc-grid-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 20px;
+}
+
+/* ===== EMPTY TEXT ===== */
+.kyc-empty-text {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .kyc-grid-wrapper {
+    grid-template-columns: 1fr;
+  }
+}

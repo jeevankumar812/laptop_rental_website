@@ -7,6 +7,7 @@ import {
   forgotPassword,
   resetPassword,
   getAllUsers,
+  updateKYCStatus,
 } from "../controllers/userContoller.js";
 import validate from "../middleware/validate.js";
 import {
@@ -37,6 +38,8 @@ router.post(
   uploadKYCInfo.single("document"),
   uploadKYC,
 );
+router.put("/kyc/:id", protect, admin, updateKYCStatus);
+
 router.post("/forgot-password", validate(forgotPasswordSchema), forgotPassword);
 router.post("/reset-password", validate(resetPasswordSchema), resetPassword);
 

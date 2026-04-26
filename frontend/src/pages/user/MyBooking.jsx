@@ -1,9 +1,14 @@
-import React, { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import API from "../../api/axios";
 import "./MyBooking.css";
+import ReviewModal from "./ReviewModal";
 
 const MyBooking = () => {
   const [bookings, setBookings] = useState([]);
+  const [selectedBooking, setSelectedBooking] = useState(null);
+  const [rating, setRating] = useState(0);
+  const [comment, setComment] = useState("");
+  const [existingReview, setExistingReview] = useState(null);
 
   useEffect(() => {
     const fetchBookings = async () => {
@@ -11,14 +16,12 @@ const MyBooking = () => {
         const res = await API.get("/payments/my-history");
         setBookings(res.data);
       } catch (err) {
-        console.error("Error fetching bookings:", err);
+        console.error(err);
       }
     };
-
     fetchBookings();
   }, []);
 
-  // 📅 Format Date
   const formatDate = (date) => {
     if (!date) return "-";
     return new Date(date).toLocaleDateString("en-IN", {
@@ -28,39 +31,94 @@ const MyBooking = () => {
     });
   };
 
-  // ⏱ Duration
   const getDays = (from, to) => {
     if (!from || !to) return 0;
-    const diff =
-      new Date(to).getTime() - new Date(from).getTime();
-    return Math.ceil(diff / (1000 * 60 * 60 * 24));
+    return Math.ceil(
+      (new Date(to) - new Date(from)) / (1000 * 60 * 60 * 24)
+    );
+  };
+
+  const handleOpen = async (booking) => {
+    setSelectedBooking(booking);
+
+    try {
+      const rentalId = booking.rentalId?._id || booking.rentalId;
+      const res = await API.get(`/reviews/rental/${rentalId}`);
+
+      if (res.data) {
+        setExistingReview(res.data);
+        setRating(res.data.rating);
+        setComment(res.data.comment);
+      } else {
+        setExistingReview(null);
+        setRating(0);
+        setComment("");
+      }
+    } catch {
+      setExistingReview(null);
+      setRating(0);
+      setComment("");
+    }
+  };
+
+  const handleSubmit = async () => {
+    try {
+      const rental = selectedBooking.rentalId;
+      const rentalId = rental?._id || rental;
+      const laptopId =
+        rental?.laptopId?._id || rental?.laptopId || selectedBooking?.laptopId;
+
+      if (existingReview) {
+        await API.put(`/reviews/${existingReview._id}`, {
+          rating,
+          comment,
+        });
+      } else {
+        await API.post("/reviews", {
+          laptopId,
+          rentalId,
+          rating,
+          comment,
+        });
+      }
+
+      alert("Review saved!");
+      setSelectedBooking(null);
+    } catch (err) {
+      alert("Error saving review");
+    }
   };
 
   return (
-    <div className="booking-page">
-      <div className="booking-header">
+    <div className="bookingPageWrapper">
+      
+      {/* HEADER */}
+      <div className="bookingHeader">
         <h2>My Bookings</h2>
         <p>Track all your rented laptops and history</p>
       </div>
 
+      {/* EMPTY STATE */}
       {bookings.length === 0 ? (
-        <div className="empty-state">
+        <div className="bookingEmpty">
           <p>No bookings found</p>
         </div>
       ) : (
-        <div className="booking-grid">
+        <div className="bookingGrid">
           {bookings.map((booking) => {
             const laptop = booking.rentalId?.laptopId;
             const from = booking.rentalId?.rentedFrom;
             const to = booking.rentalId?.rentedTo;
-
             const days = getDays(from, to);
-            const perDay = laptop?.pricing?.perDay || 0;
 
             return (
-              <div className="booking-card" key={booking._id}>
+              <div
+                key={booking._id}
+                className="bookingCard"
+                onClick={() => handleOpen(booking)}
+              >
                 {/* IMAGE */}
-                <div className="card-image">
+                <div className="bookingCardImage">
                   <img
                     src={`http://localhost:8000/${laptop?.images?.[0]}`}
                     alt="laptop"
@@ -68,20 +126,21 @@ const MyBooking = () => {
                 </div>
 
                 {/* CONTENT */}
-                <div className="card-content">
+                <div className="bookingCardContent">
+                  
                   <h3>
                     {laptop
                       ? `${laptop.brand} ${laptop.model}`
                       : "Laptop"}
                   </h3>
 
-                  <p className="specs">
+                  <p className="bookingSpecs">
                     {laptop?.specs?.processor} • {laptop?.specs?.ram} •{" "}
                     {laptop?.specs?.storage}
                   </p>
 
                   {/* DATE */}
-                  <div className="date-section">
+                  <div className="bookingDateSection">
                     <div>
                       <span>Start</span>
                       <p>{formatDate(from)}</p>
@@ -91,22 +150,19 @@ const MyBooking = () => {
                       <p>{formatDate(to)}</p>
                     </div>
                     <div>
-                      <span>Duration</span>
-                      <p>{days} days</p>
+                      <span>Days</span>
+                      <p>{days}</p>
                     </div>
                   </div>
 
                   {/* PRICE + STATUS */}
-                  <div className="price-status">
-                    <div className="price-box">
-                     
-                      <h4>
-                        ₹{booking.amount?.toLocaleString()}
-                      </h4>
+                  <div className="bookingPriceStatus">
+                    <div className="bookingPriceBox">
+                      <h4>₹{booking.amount?.toLocaleString()}</h4>
                     </div>
 
                     <span
-                      className={`status ${
+                      className={`bookingStatus ${
                         booking.status === "success"
                           ? "paid"
                           : "pending"
@@ -123,6 +179,18 @@ const MyBooking = () => {
           })}
         </div>
       )}
+
+      {/* REVIEW MODAL */}
+      <ReviewModal
+        selectedBooking={selectedBooking}
+        rating={rating}
+        setRating={setRating}
+        comment={comment}
+        setComment={setComment}
+        existingReview={existingReview}
+        onClose={() => setSelectedBooking(null)}
+        onSubmit={handleSubmit}
+      />
     </div>
   );
 };

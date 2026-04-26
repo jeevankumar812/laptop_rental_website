@@ -56,7 +56,7 @@ const LaptopCard = ({ laptops = [] }) => {
               <div className="card-bottom">
                 <span className="price">₹{lap.pricing?.perDay}</span>
 
-                <button onClick={(e) => goToCheckout(lap, e)}>Rent</button>
+                <button className ="butt" onClick={(e) => goToCheckout(lap, e)}>Rent</button>
               </div>
             </div>
           </div>

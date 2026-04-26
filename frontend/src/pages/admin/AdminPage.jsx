@@ -11,28 +11,37 @@ import "./AdminPage.css";
 function AdminPage() {
   return (
     <div className="adminContainer">
-      
       {/* Sidebar */}
       <aside className="sidebar">
-        <h2 className="logo">RentByte Admin</h2>
+        <h2 className="admin-logo">RentByte Admin</h2>
 
         <nav>
-          <NavLink to="/admin" end className="navItem">Dashboard</NavLink>
-<NavLink to="/admin/kyc" className="navItem">KYC</NavLink>
-<NavLink to="/admin/laptops" className="navItem">Laptops</NavLink>
-<NavLink to="/admin/payments" className="navItem">Payments</NavLink>
-<NavLink to="/admin/rentals" className="navItem">Rentals</NavLink>
-<NavLink to="/admin/reviews" className="navItem">Reviews</NavLink>
-<NavLink to="/admin/users" className="navItem">Users</NavLink>
+          <NavLink to="/admin" end className="navItem">
+            Dashboard
+          </NavLink>
+          <NavLink to="/admin/kyc" className="navItem">
+            KYC
+          </NavLink>
+          <NavLink to="/admin/laptops" className="navItem">
+            Laptops
+          </NavLink>
+          <NavLink to="/admin/payments" className="navItem">
+            Payments
+          </NavLink>
+          <NavLink to="/admin/rentals" className="navItem">
+            Rentals
+          </NavLink>
+          <NavLink to="/admin/reviews" className="navItem">
+            Reviews
+          </NavLink>
+          <NavLink to="/admin/users" className="navItem">
+            Users
+          </NavLink>
         </nav>
       </aside>
 
       {/* Main Content */}
       <main className="mainContent">
-        <header className="topBar">
-          <h1>Admin Panel</h1>
-        </header>
-
         <div className="contentArea">
           <Routes>
             <Route index element={<Dashboard />} />
@@ -45,7 +54,6 @@ function AdminPage() {
           </Routes>
         </div>
       </main>
-
     </div>
   );
 }

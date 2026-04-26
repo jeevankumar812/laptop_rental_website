@@ -3,14 +3,12 @@ import { z } from "zod";
 const validate = (schema) => {
   return (req, res, next) => {
     try {
-      // Parse and validate request body
       const validatedData = schema.parse(req.body);
       req.body = validatedData;
       next();
     } catch (error) {
       if (error instanceof z.ZodError) {
-        // Format Zod errors
-        const formattedErrors = error.errors.map((err) => ({
+        const formattedErrors = error.issues.map((err) => ({
           field: err.path.join("."),
           message: err.message,
         }));
@@ -20,7 +18,8 @@ const validate = (schema) => {
           details: formattedErrors,
         });
       }
-      next(error);
+
+      return res.status(500).json({ error: "Internal Server Error" });
     }
   };
 };

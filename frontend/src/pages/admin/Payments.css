@@ -1,0 +1,165 @@
+/* ===== FONT (IMPORTANT - COOL LOOK) ===== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+/* ===== PAGE ===== */
+.admin-payments-page {
+  width: 100%;
+  flex: 1;
+  background: #f5f7fb;
+  font-family: 'Inter', sans-serif;
+}
+
+/* ===== CONTAINER ===== */
+.payments-container {
+  padding: 30px 35px;
+  width: 100%;
+}
+
+/* ===== HEADER ===== */
+.payments-header h2 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 25px;
+  color: #0f172a;
+  letter-spacing: -0.3px;
+}
+
+/* ===== LIST ===== */
+.payments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* ===== CARD ===== */
+.payment-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+
+  padding: 20px 22px;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  transition: all 0.25s ease;
+}
+
+/* ✨ HOVER EFFECT */
+.payment-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+/* ===== TOP ===== */
+.payment-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+/* ===== LABEL ===== */
+.label {
+  font-size: 11px;
+  color: #9ca3af;
+  margin-bottom: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ===== TOP LEFT ===== */
+.payment-top-left {
+  font-size: 14px;
+  color: #374151;
+}
+
+.payment-top-left strong {
+  color: #111827;
+  font-weight: 500;
+}
+
+/* ===== STATUS ===== */
+.status {
+  font-size: 11px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: 1px solid;
+  text-transform: capitalize;
+  font-weight: 500;
+}
+
+/* SUCCESS */
+.status-success {
+  color: #166534;
+  border-color: #22c55e;
+  background: #ecfdf5;
+}
+
+/* PENDING */
+.status-pending {
+  color: #991b1b;
+  border-color: #ef4444;
+  background: #fef2f2;
+}
+
+/* ===== AMOUNT ===== */
+.payment-amount {
+  font-size: 22px;
+  font-weight: 600;
+  color: #111827;
+  letter-spacing: -0.5px;
+}
+
+/* ===== USER ===== */
+.payment-user {
+  font-size: 14px;
+  color: #374151;
+}
+
+.payment-user span {
+  display: block;
+  color: #6b7280;
+  font-size: 13px;
+}
+
+/* ===== DIVIDER ===== */
+.payment-divider {
+  width: 100%;
+  height: 1px;
+  background: #e5e7eb;
+  margin: 5px 0;
+}
+
+/* ===== FOOTER ===== */
+.payment-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* ===== LOADING ===== */
+.payments-loading {
+  padding: 50px;
+  text-align: center;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .payment-top {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .payment-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+}

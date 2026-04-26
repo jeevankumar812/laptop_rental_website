@@ -1,0 +1,143 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* BODY FULL SCREEN */
+body {
+  background: #ffffff;
+  font-family: "Inter", "Segoe UI", sans-serif;
+}
+
+/* MAIN WRAPPER - FULL PAGE */
+.success-container {
+  width: 100%;
+  min-height: 100vh;
+  padding: 40px 20px;
+  background: #f7f7f7;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* CONTENT WRAPPER */
+.success-container > * {
+  width: 100%;
+  max-width: 900px;
+}
+
+/* HEADER */
+.success-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.success-header h1 {
+  font-size: 32px;
+  color: #111;
+}
+
+.success-header p {
+  color: #555;
+}
+
+/* CARD */
+.success-card {
+  display: flex;
+  gap: 20px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #eee;
+  margin-bottom: 20px;
+}
+
+.success-img {
+  width: 160px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* INFO */
+.success-info h2 {
+  font-size: 20px;
+  margin-bottom: 8px;
+  color: #111;
+}
+
+.success-info p {
+  color: #444;
+  font-size: 14px;
+}
+
+/* SECTIONS */
+.success-section {
+  background: #fff;
+  padding: 18px;
+  border-radius: 10px;
+  border: 1px solid #eee;
+  margin-bottom: 18px;
+}
+
+.success-section h3 {
+  margin-bottom: 10px;
+  color: #111;
+}
+
+/* 🔥 INLINE LABEL + VALUE (FIXED) */
+.success-section p {
+  display: grid;
+  grid-template-columns: 150px auto; /* label | value */
+  margin: 6px 0;
+  font-size: 14px;
+  align-items: center;
+}
+
+/* LABEL */
+.success-section span {
+  font-weight: 600;
+  color: #222;
+}
+
+/* VALUE */
+.success-section p {
+  color: #444;
+}
+
+/* TOTAL */
+.total {
+  margin-top: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #000;
+}
+
+/* FOOTER */
+.success-footer {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .success-card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .success-img {
+    width: 100%;
+    height: 180px;
+  }
+
+  .success-section p {
+    grid-template-columns: 1fr; /* stack on mobile */
+    gap: 2px;
+  }
+}

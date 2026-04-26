@@ -60,34 +60,25 @@ const ResetPassword = () => {
     }
   };
 
-  if (!token && !error) {
-    return (
-      <div className="auth-container">
-        <div className="auth-form">
-          <div className="text-center">Loading...</div>
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div className="auth-container">
-      <div className="auth-form">
+    <div className="resetPage-container">
+      <div className="resetPage-form">
         <h2>Reset Password</h2>
-        <p className="auth-description">
+
+        <p className="resetPage-description">
           Please enter your new password below.
         </p>
 
         {message && (
-          <div className="alert-success">
-            <div>{message}</div>
+          <div className="resetPage-success">
+            {message}
             <div className="mt-2">Redirecting to login...</div>
           </div>
         )}
 
         {error && (
-          <div className="alert-error">
-            <div>{error}</div>
+          <div className="resetPage-error">
+            {error}
             <div className="mt-2">
               <Link to="/forgot-password">Request new reset link</Link>
             </div>
@@ -98,7 +89,7 @@ const ResetPassword = () => {
           <form onSubmit={handleSubmit}>
             <input
               type="password"
-              placeholder="New Password (min. 6 characters)"
+              placeholder="New Password (min 6 chars)"
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
               disabled={isLoading}
@@ -118,7 +109,7 @@ const ResetPassword = () => {
               {isLoading ? "Resetting..." : "Reset Password"}
             </button>
 
-            <div className="text-center">
+            <div className="resetPage-footer">
               <Link to="/login">Back to Login</Link>
             </div>
           </form>

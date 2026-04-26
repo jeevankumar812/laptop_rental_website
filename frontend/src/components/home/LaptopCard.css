@@ -1,18 +1,17 @@
 /* ================= CONTAINER ================= */
 .row-container {
   position: relative;
-  width: 100%;          /* full width */
+  width: 100%;
   display: flex;
-  justify-content: center; 
+  justify-content: center;
 }
 
-
+/* ================= ROW ================= */
 .row {
   display: flex;
-  justify-content: center;   /* 🔥 center content */
-  gap: 20px;
+  gap: 22px;
   overflow-x: auto;
-  padding: 20px 60px;
+  padding: 25px 50px;
   scroll-behavior: smooth;
 }
 
@@ -25,70 +24,81 @@
   position: absolute;
   top: 45%;
   transform: translateY(-50%);
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
+
   border: none;
-  background: rgba(0, 0, 0, 0.6);
-  color: white;
+  background: #ffffff;
+  color: #0E3386;
+
   font-size: 22px;
   cursor: pointer;
   z-index: 5;
-  transition: 0.2s ease;
+
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: 0.25s ease;
 }
 
-.nav-btn.left {
-  left: 8px;
-}
-
-.nav-btn.right {
-  right: 8px;
-}
+.nav-btn.left { left: 10px; }
+.nav-btn.right { right: 10px; }
 
 .nav-btn:hover {
-  background: #22c55e;
+  background: #0E3386;
+  color: #fff;
 }
 
 /* ================= CARD ================= */
 .card {
-  min-width: 250px;
-  max-width: 250px;
-  background: #0f172a;
-  border-radius: 12px;
+  min-width: 280px;
+  max-width: 280px;
+  background: #ffffff;
+  border-radius: 16px;
   overflow: hidden;
-  transition: 0.25s ease;
+  transition: all 0.3s ease;
+  border: 1px solid #e2e8f0;
+
+  /* 🔥 FORCE TEXT COLOR */
+  color: #000 !important;
+}
+
+.card * {
+  color: #000 !important;   /* 🔥 OVERRIDE ANY GLOBAL STYLES */
 }
 
 .card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.1);
 }
 
 /* ================= IMAGE ================= */
 .card-img {
   width: 100%;
-  height: 150px;
+  height: 160px;
   object-fit: cover;
+  transition: 0.3s ease;
+}
+
+.card:hover .card-img {
+  transform: scale(1.05);
 }
 
 /* ================= BODY ================= */
 .card-body {
-  padding: 14px;
-  color: white;
+  padding: 16px;
 }
 
 /* TITLE */
 .card-body h3 {
   font-size: 15px;
   font-weight: 600;
-  margin-bottom: 2px;
+  margin-bottom: 4px;
 }
 
 /* BRAND */
 .muted {
   font-size: 12px;
-  color: #94a3b8;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 /* ================= TAGS ================= */
@@ -96,15 +106,17 @@
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
 .tags span {
   font-size: 11px;
-  background: #1e293b;
-  padding: 4px 7px;
+  background: #e0f2fe;
+  padding: 4px 8px;
   border-radius: 6px;
-  color: #cbd5f5;
+
+  color: #0E3386 !important; /* keep blue */
+  border: 1px solid #bae6fd;
 }
 
 /* ===== BOTTOM SECTION ===== */
@@ -113,41 +125,43 @@
   gap: 10px;
 }
 
-/* ===== PRICE BOX ===== */
+/* ===== PRICE ===== */
 .price {
   flex: 1;
-  background: #1e293b;
-  color: #22c55e;
+  background: #f1f5f9;
 
-  height: 41px; /* ✅ SAME as button */
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
 
-  border-radius: 8px;
+  border-radius: 10px;
   font-weight: 600;
   font-size: 13px;
 }
 
 /* ===== BUTTON ===== */
 .card-bottom button {
-  flex: 1; /* 🔥 equal width */
+  flex: 1;
+  height: 40px;
 
-  height: 41px; /* 🔥 same height */
-  background: #22c55e;
+  background: #0E3386;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
 
-  color: white;
+  color: #ffffff !important; /* keep white */
   font-size: 13px;
   font-weight: 500;
+
   cursor: pointer;
-  transition: 0.2s ease;
+  transition: all 0.25s ease;
 }
 
 .card-bottom button:hover {
-  background: #16a34a;
+  background: #0E3386;
 }
+
+/* CLICKABLE */
 .clickable {
   cursor: pointer;
 }

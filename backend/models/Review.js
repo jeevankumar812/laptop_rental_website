@@ -22,7 +22,7 @@ const reviewSchema = new Schema(
   },
   { timestamps: true },
 );
-reviewSchema.index({ rentalId: 1 }, { unique: true });
+reviewSchema.index({ userId: 1, rentalId: 1 }, { unique: true });
 
 const Review = mongoose.model("Review", reviewSchema);
 

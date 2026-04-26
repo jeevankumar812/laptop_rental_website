@@ -1,26 +1,24 @@
 /* ===== CONTAINER ===== */
-.auth-container {
+.authPage-container {
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
 
-  background: linear-gradient(135deg, #020617, #0f172a);
+  background: #ffffff; /* force white */
   padding: 20px;
 }
 
-/* ===== FORM BOX ===== */
-.auth-form {
+/* ===== FORM ===== */
+.authPage-form {
   width: 380px;
-  background: rgba(15, 23, 42, 0.9); /* dark glass */
+  background: #ffffff;
   padding: 35px;
 
-  border-radius: 12px;
+  border-radius: 14px;
 
-  backdrop-filter: blur(10px);
-  border: 1px solid #1e293b;
-
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
 
   display: flex;
   flex-direction: column;
@@ -28,84 +26,65 @@
 }
 
 /* ===== TITLE ===== */
-.auth-form h2 {
+.authPage-form h2 {
   text-align: center;
-  margin-bottom: 10px;
-  color: white;
-  font-weight: 600;
+  color: #000;
 }
 
-/* ===== INPUTS ===== */
-.auth-form input {
-  padding: 11px 14px;
-  border: 1px solid #1e293b;
-  border-radius: 8px;
+/* ===== INPUT ===== */
+.authPage-form input {
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
 
-  font-size: 14px;
+  background: #f9fafb;
+  color: #000;
 
-  background: #020617;
-  color: white;
-
-  transition: all 0.2s ease;
+  transition: 0.2s;
 }
 
-/* INPUT FOCUS */
-.auth-form input:focus {
-  border-color: #22c55e;
+.authPage-form input:focus {
+  border-color: #0E3386;
   outline: none;
-  box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.2);
+  background: #fff;
+  box-shadow: 0 0 0 2px rgba(14, 51, 134, 0.15);
 }
 
-/* ===== FORGOT PASSWORD ===== */
-.text-right {
+/* ===== TEXT RIGHT ===== */
+.authPage-textRight {
   text-align: right;
 }
 
-.text-right a {
+.authPage-textRight a {
   font-size: 13px;
-  color: #22c55e;
-  text-decoration: none;
-}
-
-.text-right a:hover {
-  text-decoration: underline;
+  color: #0E3386;
 }
 
 /* ===== BUTTON ===== */
-.auth-form button {
+.authPage-form button {
   padding: 12px;
-
+  border-radius: 10px;
   border: none;
-  border-radius: 8px;
 
-  background: #22c55e;
+  background: #0E3386;
   color: white;
 
-  font-size: 15px;
   font-weight: 600;
-
   cursor: pointer;
-
-  transition: all 0.2s ease;
+  transition: 0.25s;
 }
 
-.auth-form button:hover {
-  background: #16a34a;
-  transform: translateY(-1px);
+.authPage-form button:hover {
+  background: #1a4bb8;
 }
 
-/* ===== FOOTER TEXT ===== */
-.auth-form p {
+/* ===== FOOTER ===== */
+.authPage-form p {
   text-align: center;
-  font-size: 14px;
-  color: #94a3b8;
+  color: #6b7280;
 }
 
-.auth-form a {
-  color: #22c55e;
+.authPage-form a {
+  color: #0E3386;
   text-decoration: none;
-}
-
-.auth-form a:hover {
-  text-decoration: underline;
 }

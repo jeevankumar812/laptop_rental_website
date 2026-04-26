@@ -35,8 +35,8 @@ const Login = ({ setUser }) => {
   };
 
   return (
-    <div className="auth-container">
-      <form className="auth-form" onSubmit={handleSubmit}>
+    <div className="authPage-container">
+      <form className="authPage-form" onSubmit={handleSubmit}>
         <h2>Login</h2>
 
         <input
@@ -55,13 +55,12 @@ const Login = ({ setUser }) => {
           required
         />
 
-        <div className="text-right">
+        <div className="authPage-textRight">
           <Link to="/forgot-password">Forgot Password?</Link>
         </div>
 
         <button type="submit">Login</button>
 
-        {/* 🔥 SWITCH TO SIGNUP */}
         <p>
           Don’t have an account?{" "}
           <Link to="/signup">Signup</Link>
