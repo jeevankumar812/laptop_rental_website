@@ -8,6 +8,11 @@ import {
   MemoryStick,
   Laptop,
   BadgeCheck,
+<<<<<<< HEAD
+  Gpu,
+  MonitorCog,
+=======
+>>>>>>> 7db5b02f8c771e5eb8e3fbbcb2e3dcafc98b63b9
 } from "lucide-react";
 import "./LaptopDetails.css";
 
@@ -54,6 +59,20 @@ const LaptopDetails = () => {
   return (
     <div className="laptopDetailsWrapper">
       <div className="laptopDetailsLayout">
+<<<<<<< HEAD
+        {/* ===== IMAGE ===== */}
+        <div>
+          <div className="laptopImageSection laptopDetailsCard">
+            <img
+              src={`http://localhost:8000/${laptop.images?.[0] || ""}`}
+              alt={laptop.model}
+            />
+          </div>
+        </div>
+
+        {/* ===== INFO ===== */}
+        <div className="laptopInfoSection laptopDetailsCard">
+=======
 
         {/* ===== IMAGE ===== */}
         <div>
@@ -69,6 +88,7 @@ const LaptopDetails = () => {
         {/* ===== INFO ===== */}
         <div className="laptopInfoSection laptopDetailsCard">
 
+>>>>>>> 7db5b02f8c771e5eb8e3fbbcb2e3dcafc98b63b9
           {/* TITLE */}
           <div>
             <h1 className="laptopTitle">
@@ -100,10 +120,17 @@ const LaptopDetails = () => {
               <Monitor size={14} /> {laptop.specs?.display || "N/A"}
             </div>
             <div className="laptopSpecItem">
+<<<<<<< HEAD
+              <Gpu size={14} /> {laptop.specs?.gpu || "N/A"}
+            </div>
+            <div className="laptopSpecItem">
+              <MonitorCog size={14} /> {laptop.specs?.os || "N/A"}
+=======
               <Laptop size={14} /> {laptop.specs?.gpu || "N/A"}
             </div>
             <div className="laptopSpecItem">
               <Laptop size={14} /> {laptop.specs?.os || "N/A"}
+>>>>>>> 7db5b02f8c771e5eb8e3fbbcb2e3dcafc98b63b9
             </div>
           </div>
 
@@ -164,4 +191,8 @@ const LaptopDetails = () => {
   );
 };
 
+<<<<<<< HEAD
 export default LaptopDetails;
+=======
+export default LaptopDetails;
+>>>>>>> 7db5b02f8c771e5eb8e3fbbcb2e3dcafc98b63b9

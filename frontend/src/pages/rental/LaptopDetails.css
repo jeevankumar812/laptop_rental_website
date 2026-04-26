@@ -1,9 +1,17 @@
 /* ===== GOOGLE FONT ===== */
+<<<<<<< HEAD
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap");
+
+/* ===== ROOT WRAPPER ===== */
+.laptopDetailsWrapper {
+  font-family: "Inter", sans-serif;
+=======
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 
 /* ===== ROOT WRAPPER (ISOLATED) ===== */
 .laptopDetailsWrapper {
   font-family: 'Inter', sans-serif;
+>>>>>>> 7db5b02f8c771e5eb8e3fbbcb2e3dcafc98b63b9
   background: #f5f7fb;
   min-height: 100vh;
   padding: 30px 20px;
@@ -13,9 +21,17 @@
 /* ===== MAIN GRID ===== */
 .laptopDetailsLayout {
   display: grid;
+<<<<<<< HEAD
+  grid-template-columns: 1fr 1.5fr;
+  gap: 32px;
+  align-items: flex-start;
+  max-width: 1200px;
+  margin: auto;
+=======
   grid-template-columns: 1.2fr 1.8fr;
   gap: 30px;
   align-items: start;
+>>>>>>> 7db5b02f8c771e5eb8e3fbbcb2e3dcafc98b63b9
 }
 
 /* ===== CARD BASE ===== */
@@ -25,25 +41,42 @@
   border-radius: 14px;
   padding: 20px;
   transition: all 0.25s ease;
+<<<<<<< HEAD
+=======
   position: relative;
+>>>>>>> 7db5b02f8c771e5eb8e3fbbcb2e3dcafc98b63b9
 }
 
 .laptopDetailsCard:hover {
   transform: translateY(-2px);
+<<<<<<< HEAD
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+=======
   box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+>>>>>>> 7db5b02f8c771e5eb8e3fbbcb2e3dcafc98b63b9
 }
 
 /* ===== IMAGE SECTION ===== */
 .laptopImageSection {
   position: sticky;
+<<<<<<< HEAD
+  top: 100px;
+=======
   top: 90px;
+>>>>>>> 7db5b02f8c771e5eb8e3fbbcb2e3dcafc98b63b9
 }
 
 .laptopImageSection img {
   width: 100%;
   border-radius: 12px;
+<<<<<<< HEAD
+  object-fit: contain;
+  background: #fff;
+  padding: 10px;
+=======
   object-fit: cover;
   
+>>>>>>> 7db5b02f8c771e5eb8e3fbbcb2e3dcafc98b63b9
 }
 
 /* ===== INFO SECTION ===== */
@@ -77,6 +110,48 @@
 /* ===== SPECS GRID ===== */
 .laptopSpecsGrid {
   display: grid;
+<<<<<<< HEAD
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+/* ===== SPEC ITEM ===== */
+.laptopSpecItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  font-size: 13px;
+
+  background: #f9fafb;
+  padding: 12px;
+  border-radius: 10px;
+
+  border: 1px solid #eef2f7;
+
+  transition: 0.2s ease;
+}
+
+.laptopSpecItem:hover {
+  background: #f1f5ff;
+  border-color: #c7d2fe;
+}
+
+/* ===== ICON STYLE ===== */
+.laptopSpecItem svg {
+  font-size: 18px;
+  color: #4f46e5;
+  flex-shrink: 0;
+}
+
+/* ===== PRICING ===== */
+.laptopPricingBox {
+  background: #f9fafb;
+  padding: 16px;
+  border-radius: 10px;
+}
+
+=======
   grid-template-columns: repeat(2, 1fr);
   gap: 12px;
 }
@@ -92,12 +167,17 @@
 }
 
 /* ===== PRICING ===== */
+>>>>>>> 7db5b02f8c771e5eb8e3fbbcb2e3dcafc98b63b9
 .laptopPricingBox h3 {
   margin-bottom: 10px;
 }
 
 .laptopPriceMain {
+<<<<<<< HEAD
+  font-size: 26px;
+=======
   font-size: 24px;
+>>>>>>> 7db5b02f8c771e5eb8e3fbbcb2e3dcafc98b63b9
   font-weight: 600;
 }
 
@@ -128,6 +208,22 @@
 
 /* ===== BUTTON ===== */
 .laptopRentBtn {
+<<<<<<< HEAD
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: fit-content;
+  padding: 12px 28px;
+
+  border-radius: 8px;
+  border: none;
+
+  background: #4f46e5;
+  color: white;
+
+  font-size: 14px;
+=======
   display: inline-flex;          /* prevents stretching */
   align-items: center;
   justify-content: center;
@@ -142,6 +238,7 @@
   color: #0E3386;
 
   font-size: 13px;
+>>>>>>> 7db5b02f8c771e5eb8e3fbbcb2e3dcafc98b63b9
   font-weight: 500;
 
   cursor: pointer;
@@ -149,13 +246,22 @@
 }
 
 .laptopRentBtn:hover {
+<<<<<<< HEAD
+  background: #4338ca;
+=======
   background: #0E3386;;
   color: #fff;
+>>>>>>> 7db5b02f8c771e5eb8e3fbbcb2e3dcafc98b63b9
 }
 
 /* ===== REVIEWS ===== */
 .laptopReviewsSection {
+<<<<<<< HEAD
+  max-width: 1200px;
+  margin: 40px auto 0;
+=======
   margin-top: 30px;
+>>>>>>> 7db5b02f8c771e5eb8e3fbbcb2e3dcafc98b63b9
 }
 
 .laptopReviewsSection h3 {
@@ -214,6 +320,8 @@
     position: static;
   }
 }
+<<<<<<< HEAD
+=======
 /* ===== LOCK PAGE HEIGHT ===== */
 .laptopDetailsWrapper {
   height: 100vh;
@@ -235,3 +343,4 @@
 
 
 
+>>>>>>> 7db5b02f8c771e5eb8e3fbbcb2e3dcafc98b63b9

@@ -1,9 +1,17 @@
 /* ===== FONT ===== */
+<<<<<<< HEAD
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap");
+
+/* ===== WRAPPER ===== */
+.bookingPageWrapper {
+  font-family: "Inter", sans-serif;
+=======
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 
 /* ===== WRAPPER ===== */
 .bookingPageWrapper {
   font-family: 'Inter', sans-serif;
+>>>>>>> 7db5b02f8c771e5eb8e3fbbcb2e3dcafc98b63b9
   background: #f5f7fb;
   min-height: 100vh;
   padding: 30px 20px;
@@ -17,6 +25,10 @@
 .bookingHeader h2 {
   font-size: 26px;
   font-weight: 600;
+<<<<<<< HEAD
+  margin-bottom: 15px;
+=======
+>>>>>>> 7db5b02f8c771e5eb8e3fbbcb2e3dcafc98b63b9
 }
 
 .bookingHeader p {
@@ -43,7 +55,11 @@
 
 .bookingCard:hover {
   transform: translateY(-4px);
+<<<<<<< HEAD
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+=======
   box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+>>>>>>> 7db5b02f8c771e5eb8e3fbbcb2e3dcafc98b63b9
 }
 
 /* ===== IMAGE ===== */
@@ -129,4 +145,8 @@
   .bookingGrid {
     grid-template-columns: 1fr;
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 7db5b02f8c771e5eb8e3fbbcb2e3dcafc98b63b9
