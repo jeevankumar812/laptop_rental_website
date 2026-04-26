@@ -34,7 +34,7 @@ const RentalSuccess = () => {
     <div className="success-container">
       {/* HEADER */}
       <div className="success-header">
-        <h1>🎉 Payment Successful</h1>
+        <h1> Payment Successful</h1>
         <p>Your rental has been confirmed</p>
       </div>
 
