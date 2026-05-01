@@ -16,7 +16,13 @@ const addressSchema = z.object({
 const registerUserSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Invalid email format"),
-  phone: z.string().min(10, "Phone number must be at least 10 digits"),
+  phone: z
+    .string()
+    .min(10, "Phone number must be at least 10 digits")
+    .regex(
+      /^[0-9]{10}$/,
+      "Phone must be exactly 10 digits and it should be a valid phone number",
+    ),
   password: z
     .string()
     .min(6, "Password must be at least 6 characters")
@@ -24,7 +30,10 @@ const registerUserSchema = z.object({
   street: z.string().min(1, "Street is required"),
   city: z.string().min(1, "City is required"),
   state: z.string().min(1, "State is required"),
-  pincode: z.string().min(6, "Pincode must be at least 6 digits"),
+  pincode: z
+    .string()
+    .min(6, "Pincode must be at least 6 digits")
+    .regex(/^[0-9]{6}$/, "Pincode must be exactly 6 digits"),
 });
 
 const loginUserSchema = z.object({
@@ -38,11 +47,16 @@ const updateProfileSchema = z.object({
   phone: z
     .string()
     .min(10, "Phone number must be at least 10 digits")
+    .regex(/^[0-9]{10}$/, "Phone must be exactly 10 digits")
     .optional(),
   street: z.string().min(1, "Street is required").optional(),
   city: z.string().min(1, "City is required").optional(),
   state: z.string().min(1, "State is required").optional(),
-  pincode: z.string().min(6, "Pincode must be at least 6 digits").optional(),
+  pincode: z
+    .string()
+    .min(6, "Pincode must be at least 6 digits")
+    .regex(/^[0-9]{6}$/, "Pincode must be exactly 6 digits")
+    .optional(),
 });
 
 const forgotPasswordSchema = z.object({

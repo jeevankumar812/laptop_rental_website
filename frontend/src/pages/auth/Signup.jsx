@@ -80,20 +80,23 @@ const Signup = () => {
         {errors.name && <p className="error">{errors.name}</p>}
         <input
           name="email"
+          type="email"
           placeholder="Email"
           onChange={handleChange}
           required
-          className={`auth-input ${errors.name ? "input-error" : ""}`}
+          className={`auth-input ${errors.email ? "input-error" : ""}`}
         />
         {errors.email && <p className="error">{errors.email}</p>}
         <input
           name="phone"
+          inputMode="numeric"
+          pattern="[0-9]*"
           placeholder="Phone Number"
           onChange={handleChange}
           minLength={10}
           maxLength={15}
           required
-          className={`auth-input ${errors.name ? "input-error" : ""}`}
+          className={`auth-input ${errors.phone ? "input-error" : ""}`}
         />
         {errors.phone && <p className="error">{errors.phone}</p>}
         <input
@@ -103,28 +106,28 @@ const Signup = () => {
           placeholder="Password"
           onChange={handleChange}
           required
-          className={`auth-input ${errors.name ? "input-error" : ""}`}
+          className={`auth-input ${errors.password ? "input-error" : ""}`}
         />
         {errors.password && <p className="error">{errors.password}</p>}
         <input
           name="street"
           placeholder="Street"
           onChange={handleChange}
-          className={`auth-input ${errors.name ? "input-error" : ""}`}
+          className={`auth-input ${errors.street ? "input-error" : ""}`}
         />
         {errors.street && <p className="error">{errors.street}</p>}
         <input
           name="city"
           placeholder="City"
           onChange={handleChange}
-          className={`auth-input ${errors.name ? "input-error" : ""}`}
+          className={`auth-input ${errors.city ? "input-error" : ""}`}
         />
         {errors.city && <p className="error">{errors.city}</p>}
         <input
           name="state"
           placeholder="State"
           onChange={handleChange}
-          className={`auth-input ${errors.name ? "input-error" : ""}`}
+          className={`auth-input ${errors.state ? "input-error" : ""}`}
         />
         {errors.state && <p className="error">{errors.state}</p>}
         <input
@@ -132,7 +135,7 @@ const Signup = () => {
           placeholder="Pincode"
           maxLength={6}
           onChange={handleChange}
-          className={`auth-input ${errors.name ? "input-error" : ""}`}
+          className={`auth-input ${errors.pincode ? "input-error" : ""}`}
         />
         {errors.pincode && <p className="error">{errors.pincode}</p>}
         <button type="submit">Signup</button>
